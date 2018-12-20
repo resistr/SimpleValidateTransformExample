@@ -5,15 +5,45 @@ using System.Globalization;
 
 namespace Framework.Derivation
 {
+    /// <summary>
+    /// Describes the context in which a derivation is performed.
+    /// </summary>
     public sealed class DerivationContext : IServiceProvider
     {
         private Func<Type, object> ServiceProvider;
         private string _displayName;
 
+        /// <summary>
+        /// Initializes a new instance of the Framework.Derivation.DerivationContext
+        /// class using the specified object instance.
+        /// </summary>
+        /// <param name="instance">The object instance to derive. It cannot be null.</param>
+        /// <exception cref="ArgumentNullException">If instance is not provided.</exception>
         public DerivationContext(object instance) : this(instance, null, null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the Framework.Derivation.DerivationContext
+        /// class using the specified object and an optional property bag.
+        /// </summary>
+        /// <param name="instance">The object instance to derive. It cannot be null.</param>
+        /// <param name="items">An optional set of key/value pairs to make available to consumers.</param>
+        /// <exception cref="ArgumentNullException">If instance is not provided.</exception>
         public DerivationContext(object instance, IDictionary<object, object> items) : this(instance, null, items) { }
 
+        /// <summary>
+        /// Initializes a new instance of the Framework.Derivation.DerivationContext
+        /// class using the service provider and dictionary of service consumers.
+        /// </summary>
+        /// <param name="instance">The object to derive. This parameter is required.</param>
+        /// <param name="serviceProvider">
+        /// The object that implements the System.IServiceProvider interface.
+        /// This parameter is optional.
+        /// </param>
+        /// <param name="items">
+        /// A dictionary of key/value pairs to make available to the service consumers.
+        /// This parameter is optional.
+        /// </param>
+        /// <exception cref="ArgumentNullException">If instance is not provided.</exception>
         public DerivationContext(object instance, IServiceProvider serviceProvider, IDictionary<object, object> items)
         {
             ObjectInstance = instance ?? throw new ArgumentNullException(nameof(instance));
@@ -44,6 +74,9 @@ namespace Framework.Derivation
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public object ObjectInstance { get; private set; }
 
         public Type ObjectType

@@ -6,7 +6,7 @@ namespace Library.Transform
 {
     public class CommonToSpecificTransformer : TransformerBase<MyCommonImpl, SomeSpecificDefinition>
     {
-        public override SomeSpecificDefinition Transform(MyCommonImpl source)
+        public override SomeSpecificDefinition TransformInternal(MyCommonImpl source)
             => new SomeSpecificDefinition
             {
                 TestBool = bool.Parse(source.TestBool),

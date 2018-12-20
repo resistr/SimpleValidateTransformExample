@@ -35,7 +35,7 @@ namespace Library
             services.AddSingleton<ITransform<MyCommonImpl, SomeSpecificDefinition>, CommonToSpecificTransformer>();
 
             //Transformaion Service
-            services.AddSingleton<ITransformationService<MyCommonImpl, SomeSpecificDefinition>, TransformationService<MyCommonImpl, SomeSpecificDefinition>>();
+            services.AddSingleton<IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition>, GenericTransformationService<MyCommonImpl, SomeSpecificDefinition>>();
 
             //Startup actions
             services.AddScoped<IHaveStartupActions, GenericCachedDataProvider<LookupData>>();

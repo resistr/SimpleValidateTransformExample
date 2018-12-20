@@ -3,6 +3,8 @@ using Framework.Transformation;
 using Framework.Validation;
 using Library.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace TestApi.Controllers
 {
@@ -10,12 +12,12 @@ namespace TestApi.Controllers
     [ApiController]
     public class ConversionController : ControllerBase
     {
-        protected readonly ITransformationService<MyCommonImpl, SomeSpecificDefinition> TransformationService;
+        protected readonly IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition> TransformationService;
         protected readonly IDerivationService DerivationService;
         protected readonly IValidationService ValidationService;
 
         public ConversionController(
-            ITransformationService<MyCommonImpl, SomeSpecificDefinition> transformationService,
+            IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition> transformationService,
             IDerivationService derivationService,
             IValidationService validationService)
         {
@@ -55,6 +57,13 @@ namespace TestApi.Controllers
         [Produces("application/xml")]
         public SomeSpecificDefinition Post([FromBody] MyCommonImpl source)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new Framework.Validation.ValidationException(
+                    "Source model is invalid.", 
+                    ModelState.SelectMany(state => state.Value.Errors.Select(error => new ValidationResult(error.ErrorMessage))), 
+                    source);
+            }
             var dest = TransformationService.Transform(source);
             DerivationService.Derive(dest);
             ValidationService.Validate(dest);

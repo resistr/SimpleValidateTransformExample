@@ -2,6 +2,8 @@
 using Framework.Transformation;
 using Framework.Validation;
 using Library.Dto;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web.Http;
 
 namespace TestWebApi472.Controllers
@@ -11,18 +13,18 @@ namespace TestWebApi472.Controllers
     /// </summary>
     public class ConversionController : ApiController
     {
-        protected readonly ITransformationService<MyCommonImpl, SomeSpecificDefinition> TransformationService;
+        protected readonly IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition> TransformationService;
         protected readonly IDerivationService DerivationService;
         protected readonly IValidationService ValidationService;
 
         /// <summary>
-        /// Initializes a new instance of theTestWebApi472.Controllers.ConversionController class.
+        /// Initializes a new instance of the TestWebApi472.Controllers.ConversionController class.
         /// </summary>
         /// <param name="transformationService">The transformation service to test.</param>
         /// <param name="derivationService">The derivation service to test.</param>
         /// <param name="validationService">The validation service to test.</param>
         public ConversionController(
-            ITransformationService<MyCommonImpl, SomeSpecificDefinition> transformationService,
+            IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition> transformationService,
             IDerivationService derivationService,
             IValidationService validationService)
         {
@@ -70,6 +72,13 @@ namespace TestWebApi472.Controllers
         [HttpPost]
         public SomeSpecificDefinition Post([FromBody] MyCommonImpl source)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new Framework.Validation.ValidationException(
+                    "Source model is invalid.",
+                    ModelState.SelectMany(state => state.Value.Errors.Select(error => new ValidationResult(error.ErrorMessage))),
+                    source);
+            }
             var dest = TransformationService.Transform(source);
             DerivationService.Derive(dest);
             ValidationService.Validate(dest);

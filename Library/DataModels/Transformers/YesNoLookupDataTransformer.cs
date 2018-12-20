@@ -6,7 +6,7 @@ namespace Library.DataModels.Transform
 {
     public class YesNoLookupDataTransformer : TransformerBase<LookupData, YesNoLookupData>
     {
-        public override YesNoLookupData Transform(LookupData source)
+        public override YesNoLookupData TransformInternal(LookupData source)
             => new YesNoLookupData { Key = source.Name, Value = source.Value };
 
         public override IEnumerable<YesNoLookupData> Transform(IEnumerable<LookupData> source)

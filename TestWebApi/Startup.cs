@@ -22,7 +22,10 @@ namespace TestWebApi
         {
             services.AddMemoryCache();
             services.AddClientSpecificTransformations();
-            services.AddMvc().AddXmlSerializerFormatters().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().AddXmlSerializerFormatters().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .ConfigureApiBehaviorOptions(options => {
+                    options.SuppressModelStateInvalidFilter = true;
+                    });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
