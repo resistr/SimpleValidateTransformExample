@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{6311CE5B-E6BB-42AC-8ED2-D876C11DF736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Framework.csproj", "{6311CE5B-E6BB-42AC-8ED2-D876C11DF736}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{8F8F4043-F735-445B-A6E4-842C74293F71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library", "Library\Library.csproj", "{8F8F4043-F735-445B-A6E4-842C74293F71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApi", "TestWebApi\TestWebApi.csproj", "{1968EDBC-78C1-407D-8FE2-FB63A588C983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApi", "TestWebApi\TestWebApi.csproj", "{1968EDBC-78C1-407D-8FE2-FB63A588C983}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet.DependencyInjection", "AspNet.DependencyInjection\AspNet.DependencyInjection.csproj", "{FDDA464B-3561-4380-AA74-6BF8AFEFD967}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApi472", "TestWebApi472\TestWebApi472.csproj", "{A29DB989-726F-4748-9365-6448836D5F9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{1968EDBC-78C1-407D-8FE2-FB63A588C983}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1968EDBC-78C1-407D-8FE2-FB63A588C983}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1968EDBC-78C1-407D-8FE2-FB63A588C983}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDDA464B-3561-4380-AA74-6BF8AFEFD967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDDA464B-3561-4380-AA74-6BF8AFEFD967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDDA464B-3561-4380-AA74-6BF8AFEFD967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDDA464B-3561-4380-AA74-6BF8AFEFD967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A29DB989-726F-4748-9365-6448836D5F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29DB989-726F-4748-9365-6448836D5F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29DB989-726F-4748-9365-6448836D5F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29DB989-726F-4748-9365-6448836D5F9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
