@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using System.Text;
 
 namespace Framework.Derivation
 {
+    /// <summary>
+    /// Specifies a custom derivation method that is used to derive a property or class instance.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Parameter, AllowMultiple = true)]
     public sealed class CustomDerivationAttribute : DerivationAttribute
     {
@@ -17,6 +18,11 @@ namespace Framework.Derivation
         private Lazy<string> _malformedErrorMessage;
         private Tuple<string, Type> _typeId;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomDerivationAttribute"/> class.
+        /// </summary>
+        /// <param name="derivorType">The type that contains the method that performs custom derivation.</param>
+        /// <param name="method">The method that performs custom derivation.</param>
         public CustomDerivationAttribute(Type derivorType, string method)
             : base(() => "{0} is not derivable.")
         {
@@ -25,8 +31,14 @@ namespace Framework.Derivation
             _malformedErrorMessage = new Lazy<string>(CheckAttributeWellFormed);
         }
 
+        /// <summary>
+        /// Gets the type that performs custom derivation.
+        /// </summary>
         public Type DerivorType { get; private set; }
 
+        /// <summary>
+        /// Gets the derivation method.
+        /// </summary>
         public string Method { get; private set; }
 
         public override object TypeId

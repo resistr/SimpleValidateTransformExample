@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace Framework.Derivation
 {
+    /// <summary>
+    /// Serves as the base class for all derivation attributes.
+    /// </summary>
     public abstract class DerivationAttribute : Attribute
     {
         private string _errorMessage;
@@ -14,10 +17,24 @@ namespace Framework.Derivation
         private Func<string> ErrorMessageResourceAccessor;
         private volatile bool HasBaseDoDerivation;
 
+        /// <summary>
+        /// Initializes a new instance of the Framework.Derivation.DerivationAttribute class.
+        /// </summary>
         protected DerivationAttribute() : this(() => "The field {0} is not derivable.") { }
 
+        /// <summary>
+        /// Initializes a new instance of the Framework.Derivation.DerivationAttribute class
+        /// by using the error message to associate with a derivation errors.
+        /// </summary>
+        /// <param name="errorMessage">The error message to associate with a derivation errors.</param>
         protected DerivationAttribute(string errorMessage) : this(() => errorMessage) { }
 
+        /// <summary>
+        /// Initializes a new instance of the Framework.Derivation.DerivationAttribute class
+        /// by using the function that enables access to validation resources.
+        /// </summary>
+        /// <param name="errorMessageAccessor">The function that enables access to validation resources.</param>
+        /// <exception cref="ArgumentNullException">If errorMessageAccessor is null.</exception>
         protected DerivationAttribute(Func<string> errorMessageAccessor)
             => ErrorMessageResourceAccessor = errorMessageAccessor;
 
@@ -35,6 +52,9 @@ namespace Framework.Derivation
             }
         }
 
+        /// <summary>
+        /// Gets or sets an error message to associate with a validation control if derivation fails.
+        /// </summary>
         protected string ErrorMessageString
         {
             get
@@ -46,8 +66,14 @@ namespace Framework.Derivation
 
         internal bool CustomErrorMessageSet { get; private set; }
 
+        /// <summary>
+        /// Gets a value that indicates whether the attribute requires derivation context.
+        /// </summary>
         public virtual bool RequiresDerivationContext { get; } = false;
 
+        /// <summary>
+        /// Gets or sets an error message to associate with a validation control if derivation fails.
+        /// </summary>
         public string ErrorMessage
         {
             get
@@ -67,6 +93,10 @@ namespace Framework.Derivation
             }
         }
 
+        /// <summary>
+        /// Gets or sets the error message resource name to use in order to look up the ErrorMessageResourceType
+        /// property value if derivation fails.
+        /// </summary>
         public string ErrorMessageResourceName
         {
             get
@@ -81,6 +111,10 @@ namespace Framework.Derivation
             }
         }
 
+        /// <summary>
+        /// Gets or sets the resource type to use for error-message lookup if derivation
+        /// fails.
+        /// </summary>
         public Type ErrorMessageResourceType
         {
             get
@@ -170,11 +204,22 @@ namespace Framework.Derivation
             }
         }
 
+        /// <summary>
+        /// Applies formatting to an error message, based on the data field where the error
+        /// occurred.
+        /// </summary>
+        /// <param name="name">The name to include in the formatted message.</param>
+        /// <returns>An instance of the formatted error message.</returns>
         public virtual string FormatErrorMessage(string name)
         {
             return String.Format(CultureInfo.CurrentCulture, ErrorMessageString, name);
         }
 
+        /// <summary>
+        /// Does derivation for the specified value of the object.
+        /// </summary>
+        /// <param name="value">The value of the object to validate.</param>
+        /// <returns>True if the specified value was derived; otherwise, false.</returns>
         public virtual bool DoDerivation(object value)
         {
             if (!HasBaseDoDerivation)
@@ -185,6 +230,12 @@ namespace Framework.Derivation
             return DoDerivation(value, null) == null;
         }
 
+        /// <summary>
+        /// Derives the specified value with respect to the current derivation context.
+        /// </summary>
+        /// <param name="value">The value to derive.</param>
+        /// <param name="derivationContext">The context information about the derivation operation.</param>
+        /// <returns>An instance of the <see cref="DerivationResult"/> class.</returns>
         protected virtual DerivationResult DoDerivation(object value, DerivationContext derivationContext)
         {
             if (HasBaseDoDerivation)
@@ -203,6 +254,12 @@ namespace Framework.Derivation
             return result;
         }
 
+        /// <summary>
+        /// Derives the specified value with respect to the current derivation context.
+        /// </summary>
+        /// <param name="value">The value to derive.</param>
+        /// <param name="derivationContext">The context information about the derivation operation.</param>
+        /// <returns>An instance of the <see cref="DerivationResult"/> class.</returns>
         public DerivationResult GetDerivationResult(object value, DerivationContext derivationContext)
         {
             if (derivationContext == null)
@@ -225,6 +282,12 @@ namespace Framework.Derivation
             return result;
         }
 
+        /// <summary>
+        /// Derives the specified object.
+        /// </summary>
+        /// <param name="value">The value of the object to derive.</param>
+        /// <param name="name">The name to include in the error message.</param>
+        /// <exception cref="DerivationException">If derivation fails.</exception>
         public void Derive(object value, string name)
         {
             if (!DoDerivation(value))
@@ -233,6 +296,16 @@ namespace Framework.Derivation
             }
         }
 
+        /// <summary>
+        /// Derives the specified object.
+        /// </summary>
+        /// <param name="value">The value of the object to derive.</param>
+        /// <param name="derivationContext">
+        /// The <see cref="DerivationContext"/> object that describes the context where
+        /// the derivations are performed. This parameter cannot be null.
+        /// </param>
+        /// <exception cref="ArgumentNullException">If derivationContext is not provided.</exception>
+        /// <exception cref="DerivationException">If derivation fails.</exception>
         public void Derive(object value, DerivationContext derivationContext)
         {
             if (derivationContext == null)

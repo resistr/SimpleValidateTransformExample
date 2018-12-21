@@ -2,6 +2,7 @@
 using Framework;
 using Library;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 using System.Web.Http;
 
 namespace TestWebApi472
@@ -44,6 +45,11 @@ namespace TestWebApi472
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            using (var serviceScope = config.DependencyResolver.BeginScope())
+            {
+                serviceScope.GetServices(typeof(IHaveStartupActions)).OfType<IHaveStartupActions>().Startup();
+            }
         }
     }
 }

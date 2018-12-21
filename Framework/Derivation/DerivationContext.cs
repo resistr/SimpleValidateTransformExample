@@ -75,10 +75,13 @@ namespace Framework.Derivation
         }
 
         /// <summary>
-        /// 
+        /// Gets the object to validate.
         /// </summary>
         public object ObjectInstance { get; private set; }
 
+        /// <summary>
+        /// Gets the type of the object to validate.
+        /// </summary>
         public Type ObjectType
         {
             get
@@ -87,6 +90,9 @@ namespace Framework.Derivation
             }
         }
 
+        /// <summary>
+        /// Gets or sets the name of the member to validate.
+        /// </summary>
         public string DisplayName
         {
             get
@@ -115,15 +121,32 @@ namespace Framework.Derivation
             }
         }
 
+        /// <summary>
+        /// Gets or sets the name of the member to validate.
+        /// </summary>
         public string MemberName { get; set; }
 
+        /// <summary>
+        /// Gets the dictionary of key/value pairs that is associated with this context.
+        /// </summary>
         public IDictionary<object, object> Items { get; private set; }
 
+        /// <summary>
+        /// Initializes the Framework.Derivation.DerivationContext using
+        /// a service provider that can return service instances by type when GetService
+        /// is called.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
         public void InitializeServiceProvider(Func<Type, object> serviceProvider)
         {
             ServiceProvider = serviceProvider;
         }
 
+        /// <summary>
+        /// Returns the service that provides custom validation.
+        /// </summary>
+        /// <param name="serviceType">The type of the service to use for validation.</param>
+        /// <returns>An instance of the service, or null if the service is not available.</returns>
         public object GetService(Type serviceType)
         {
             object service = null;
