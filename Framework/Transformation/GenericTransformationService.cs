@@ -8,8 +8,6 @@ namespace Framework.Transformation
     /// <typeparam name="TSource">The source type of the transformation.</typeparam>
     /// <typeparam name="TDest">The destination type of the transformation.</typeparam>
     public class GenericTransformationService<TSource, TDest> : IGenericTransformationService<TSource, TDest>
-        where TSource : class
-        where TDest : class
     {
         protected readonly ITransform<TSource, TDest> Transformer;
 

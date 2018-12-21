@@ -13,7 +13,7 @@ namespace TestWebApi472.Controllers
     /// </summary>
     public class ConversionController : ApiController
     {
-        protected readonly IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition> TransformationService;
+        protected readonly IGenericTransformationService<SourceExample, DestExample> TransformationService;
         protected readonly IDerivationService DerivationService;
         protected readonly IValidationService ValidationService;
 
@@ -24,7 +24,7 @@ namespace TestWebApi472.Controllers
         /// <param name="derivationService">The derivation service to test.</param>
         /// <param name="validationService">The validation service to test.</param>
         public ConversionController(
-            IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition> transformationService,
+            IGenericTransformationService<SourceExample, DestExample> transformationService,
             IDerivationService derivationService,
             IValidationService validationService)
         {
@@ -34,12 +34,12 @@ namespace TestWebApi472.Controllers
         }
 
         /// <summary>
-        /// HttpGet: Get an example of MyCommonImpl.
+        /// HttpGet: Get an example of SourceExample.
         /// </summary>
-        /// <returns>A fully populated and valid MyCommonImpl.</returns>
+        /// <returns>A fully populated and valid SourceExample.</returns>
         [HttpGet]
-        public MyCommonImpl Get()
-            => new MyCommonImpl
+        public SourceExample Get()
+            => new SourceExample
             {
                 TestDecimal = "1.14",
                 TestChar = "X",
@@ -65,12 +65,13 @@ namespace TestWebApi472.Controllers
         /// <summary>
         /// HttpPost: Test the transformation, validation and derivation services. 
         /// </summary>
-        /// <param name="source">The <see cref="MyCommonImpl"/> to test.</param>
-        /// <returns>The resulting <see cref="SomeSpecificDefinition"/></returns>
+        /// <param name="source">The <see cref="SourceExample"/> to test.</param>
+        /// <returns>The resulting <see cref="DestExample"/></returns>
+        /// <exception cref="TransformationException">If there is an error in the transformation process.</exception>
         /// <exception cref="DerivationException">If there is an error in the derivation process.</exception>
         /// <exception cref="ValidationException">If there is an error in the validation process.</exception>
         [HttpPost]
-        public SomeSpecificDefinition Post([FromBody] MyCommonImpl source)
+        public DestExample Post([FromBody] SourceExample source)
         {
             if (!ModelState.IsValid)
             {

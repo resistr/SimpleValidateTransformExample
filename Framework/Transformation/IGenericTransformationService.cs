@@ -7,8 +7,6 @@
     /// <typeparam name="TSource">The source type of the transformation.</typeparam>
     /// <typeparam name="TDest">The destination type of the transformation.</typeparam>
     public interface IGenericTransformationService<TSource, TDest>
-        where TSource : class
-        where TDest : class
     {
         /// <summary>
         /// Does the actual transformation. 

@@ -4,10 +4,18 @@ using System;
 
 namespace Library.Transform
 {
-    public class CommonToSpecificTransformer : TransformerBase<MyCommonImpl, SomeSpecificDefinition>
+    /// <summary>
+    /// Specific implementation of <see cref="ITransform{SourceExample, DestExample}"/>.
+    /// </summary>
+    public class SourceExampleToDestExampleTransformer : TransformerBase<SourceExample, DestExample>
     {
-        public override SomeSpecificDefinition TransformInternal(MyCommonImpl source)
-            => new SomeSpecificDefinition
+        /// <summary>
+        /// Transforms <see cref="SourceExample"/> to <see cref="DestExample"/>.
+        /// </summary>
+        /// <param name="source">The source item to transform.</param>
+        /// <returns>The transformed item.</returns>
+        public override DestExample TransformInternal(SourceExample source)
+            => new DestExample
             {
                 TestBool = bool.Parse(source.TestBool),
                 TestByte = byte.Parse(source.TestByte),

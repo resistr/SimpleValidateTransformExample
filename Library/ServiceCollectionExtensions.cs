@@ -1,6 +1,4 @@
 ﻿using Framework;
-using Framework.DataProvider;
-using Framework.Transformation;
 using Library.DataModels;
 using Library.DataModels.Transform;
 using Library.DataProvider;
@@ -10,37 +8,29 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Library
 {
+    /// <summary>
+    /// Common extensions for <see cref="IServiceCollection"/>.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Register client services. 
+        /// 
+        ///  - YesNoLookupDataProvider
+        ///  - StateLookupDataProvider
+        ///  - SourceExampleToDestExampleTransformer
+        /// </summary>
+        /// <param name="services">The service collection to register the services to.</param>
         public static void AddClientSpecificTransformations(this IServiceCollection services)
         {
             services.AddFrameworkServices();
 
-            // Data Transformers
-            services.AddSingleton<ITransform<LookupData, StateLookupData>, StateLookupDataTransformer>();
-            services.AddSingleton<ITransform<LookupData, YesNoLookupData>, YesNoLookupDataTransformer>();
-
             // Data services
-            services.AddScoped<IProvideData<LookupData>, LookupDataProvider>();
-            services.AddScoped<IProvideCachedData<LookupData>, GenericCachedDataProvider<LookupData>>();
-            services.AddScoped<IProvideData<StateLookupData>, GenericTransformDataProvider<IProvideCachedData<LookupData>, LookupData, StateLookupData>>();
-            services.AddScoped<IProvideData<YesNoLookupData>, GenericTransformDataProvider<IProvideCachedData<LookupData>, LookupData, YesNoLookupData>>();
-            services.AddScoped<IProvideData<StateLookupData>, GenericTransformDataProvider<IProvideCachedData<LookupData>, LookupData, StateLookupData>>();
-            services.AddScoped<IProvideCachedData<YesNoLookupData>, GenericCachedKeyedDataProvider<YesNoLookupData>>();
-            services.AddScoped<IProvideCachedData<StateLookupData>, GenericCachedKeyedDataProvider<StateLookupData>>();
-            services.AddScoped<IProvideKeyedData, GenericCachedKeyedDataProvider<YesNoLookupData>>();
-            services.AddScoped<IProvideKeyedData, GenericCachedKeyedDataProvider<StateLookupData>>();
+            services.AddCachedKeyedDataProvider<string, YesNoLookupData, YesNoLookupDataKeyValuePairTransform, YesNoLookupDataProvider>();
+            services.AddCachedKeyedDataProvider<string, StateLookupData, StateLookupDataKeyValuePairTransform, StateLookupDataProvider>();
 
-            // Dto Transformers
-            services.AddSingleton<ITransform<MyCommonImpl, SomeSpecificDefinition>, CommonToSpecificTransformer>();
-
-            //Transformaion Service
-            services.AddSingleton<IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition>, GenericTransformationService<MyCommonImpl, SomeSpecificDefinition>>();
-
-            //Startup actions
-            services.AddScoped<IHaveStartupActions, GenericCachedDataProvider<LookupData>>();
-            services.AddScoped<IHaveStartupActions, GenericCachedDataProvider<YesNoLookupData>>();
-            services.AddScoped<IHaveStartupActions, GenericCachedDataProvider<StateLookupData>>();
+            // Transformation services
+            services.AddTransformationService<SourceExample, DestExample, SourceExampleToDestExampleTransformer>();
         }
     }
 }

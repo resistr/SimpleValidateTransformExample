@@ -1,5 +1,5 @@
 ﻿using Framework.DataProvider;
-using Library.Derivation;
+using Framework.Derivation;
 using Library.DataModels;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -7,10 +7,13 @@ using System.Runtime.Serialization;
 
 namespace Library.Dto
 {
+    /// <summary>
+    /// A sample dest DTO object.
+    /// </summary>
     [DataContract]
-    [ExternalDataConversionDerivation(nameof(TestDeriveStringToBool), typeof(IProvideCachedData<YesNoLookupData>))]
+    [KeyedDataDerivation(nameof(TestDeriveStringToBool), typeof(IProvideKeyedData<string, YesNoLookupData>))]
     [DataCalculationDerivation(nameof(TestInt16), nameof(TestInt32), nameof(TestDeriveAddedValue))]
-    public class SomeSpecificDefinition
+    public class DestExample
     {
         [Required]
         [DataMember(EmitDefaultValue = false, IsRequired = false, Name = nameof(TestBool))]
@@ -32,8 +35,7 @@ namespace Library.Dto
         [DataMember(EmitDefaultValue = false, IsRequired = false, Name = nameof(TestDeriveAddedValue))]
         public int TestDeriveAddedValue { get; set; }
 
-        [Required]
-        [DataMember(EmitDefaultValue = false, IsRequired = false, Name = nameof(TestString))]
+        [IgnoreDataMember]
         public string TestString { get; set; }
 
         [Required]

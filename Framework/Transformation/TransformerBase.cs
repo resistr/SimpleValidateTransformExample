@@ -10,8 +10,6 @@ namespace Framework.Transformation
     /// <typeparam name="TSource">The source type of the transformation.</typeparam>
     /// <typeparam name="TDest">The destination type of the transformation.</typeparam>
     public abstract class TransformerBase<TSource, TDest> : ITransform<TSource, TDest>
-        where TSource : class
-        where TDest : class
     {
         // creating the types in advance once saves time later.
         protected static readonly Type SourceType = typeof(TSource);
@@ -51,8 +49,9 @@ namespace Framework.Transformation
         /// <param name="source">The source object to transform.</param>
         /// <returns>The result of the transformation.</returns>
         /// <exception cref="TransformationException">Wraps any underlying exception that may have occured.</exception>
+        /// <exception cref="InvalidCastException">The source was not of the proper type.</exception>
         object ITransform.Transform(object source)
-            => Transform(source as TSource);
+            => Transform((TSource)source);
 
         /// <summary>
         ///  Does the actual transformation. 

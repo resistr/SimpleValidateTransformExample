@@ -46,6 +46,7 @@ namespace TestWebApi472
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            // run start up actions
             using (var serviceScope = config.DependencyResolver.BeginScope())
             {
                 serviceScope.GetServices(typeof(IHaveStartupActions)).OfType<IHaveStartupActions>().Startup();

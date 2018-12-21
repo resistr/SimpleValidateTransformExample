@@ -8,16 +8,25 @@ using System.Linq;
 
 namespace TestApi.Controllers
 {
+    /// <summary>
+    /// The tester conversion controller. 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ConversionController : ControllerBase
     {
-        protected readonly IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition> TransformationService;
+        protected readonly IGenericTransformationService<SourceExample, DestExample> TransformationService;
         protected readonly IDerivationService DerivationService;
         protected readonly IValidationService ValidationService;
 
+        /// <summary>
+        /// Initializes a new instance of the TestWebApi.Controllers.ConversionController class.
+        /// </summary>
+        /// <param name="transformationService">The transformation service to test.</param>
+        /// <param name="derivationService">The derivation service to test.</param>
+        /// <param name="validationService">The validation service to test.</param>
         public ConversionController(
-            IGenericTransformationService<MyCommonImpl, SomeSpecificDefinition> transformationService,
+            IGenericTransformationService<SourceExample, DestExample> transformationService,
             IDerivationService derivationService,
             IValidationService validationService)
         {
@@ -26,10 +35,14 @@ namespace TestApi.Controllers
             ValidationService = validationService; 
         }
 
+        /// <summary>
+        /// HttpGet: Get an example of SourceExample.
+        /// </summary>
+        /// <returns>A fully populated and valid SourceExample.</returns>
         [HttpGet]
         [Produces("application/xml")]
-        public MyCommonImpl Get()
-            => new MyCommonImpl
+        public SourceExample Get()
+            => new SourceExample
             {
                 TestDecimal = "1.14",
                 TestChar = "X",
@@ -52,10 +65,17 @@ namespace TestApi.Controllers
                 TestTimeSpan = "00:00:15"
             };
 
-        // POST api/values
+        /// <summary>
+        /// HttpPost: Test the transformation, validation and derivation services. 
+        /// </summary>
+        /// <param name="source">The <see cref="SourceExample"/> to test.</param>
+        /// <returns>The resulting <see cref="DestExample"/></returns>
+        /// <exception cref="TransformationException">If there is an error in the transformation process.</exception>
+        /// <exception cref="DerivationException">If there is an error in the derivation process.</exception>
+        /// <exception cref="ValidationException">If there is an error in the validation process.</exception>
         [HttpPost]
         [Produces("application/xml")]
-        public SomeSpecificDefinition Post([FromBody] MyCommonImpl source)
+        public DestExample Post([FromBody] SourceExample source)
         {
             if (!ModelState.IsValid)
             {
