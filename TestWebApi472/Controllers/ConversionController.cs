@@ -66,21 +66,35 @@ namespace TestWebApi472.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody] SourceExample source)
         {
+            // 4.7.2 Web API does not automatically reject an invalid request.
+            // This must be handled manually in 4.7.2.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            // transform the data.
             var dest = TransformationService.Transform<DestExample>(source);
+
+            // derive the data.
             DerivationService.Derive(dest);
+
+            // hack put in place for testing post transform validation errors. 
             if (dest.TestDeriveStringToBool == bool.FalseString)
             {
                 dest.TestDeriveStringToBool = null;
             }
+
+            // validate the object after transformation.
             Validate(dest);
+
+            // handle post transformation validation errors.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            // return the object post transformation & validation
             return Ok(dest);
         }
     }

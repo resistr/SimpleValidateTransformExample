@@ -12,8 +12,7 @@ namespace Tool.Framework
         /// <summary>
         /// Register default framework services. 
         /// 
-        ///  - IDerivationService
-        ///  - IValidationService
+        ///  - ITransformationService
         /// </summary>
         /// <param name="services">The service collection to register the services to.</param>
         public static void AddFrameworkServices(this IServiceCollection services)

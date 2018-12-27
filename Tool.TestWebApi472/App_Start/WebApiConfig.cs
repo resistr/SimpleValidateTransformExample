@@ -30,19 +30,24 @@ namespace Tool.TestWebApi472
                 // add the default framework services (local project)
                 services.AddFrameworkServices();
 
+                // add the automapper profiles
                 services.AddAutoMapper(typeof(Library.Transform.SourceExampleToDestExampleProfile).Assembly);
 
                 // add the client specific services (local project)
                 services.AddClientSpecificTransformations();
 
+                // add validators to the service provider
                 foreach (var assemblyScanResult in AssemblyScanner.FindValidatorsInAssemblyContaining<SourceExampleValidator>())
                 {
                     services.AddTransient(assemblyScanResult.InterfaceType, assemblyScanResult.ValidatorType);
                 }
             });
 
+            // add fluent validation 
             FluentValidationModelValidatorProvider.Configure(config, provider => 
             {
+                // use a shim validation factory that uses the service provider
+                // to obtain validations
                 provider.ValidatorFactory = new ValidatorFactory(serviceProvider);
             });
 

@@ -4,14 +4,17 @@ using System.Collections.Generic;
 namespace Framework.Transformation
 {
     /// <summary>
-    /// A transformation service. 
+    /// A transformation service based on the <see cref="ITransform"/> interface. 
     /// </summary>
     public class TransformationService : ITransformationService
     {
+        /// <summary>
+        /// The DI provided <see cref="ITransform"/> transforms.
+        /// </summary>
         protected readonly IEnumerable<ITransform> Transformers;
 
         /// <summary>
-        ///  Initializes a new instance of the Framework.Transformation.TransformationService class.
+        ///  Initializes a new instance of the <see cref="TransformationService"/> class.
         /// </summary>
         /// <param name="transformers">The transformers for the types transformed by this service.</param>
         public TransformationService(IEnumerable<ITransform> transformers)

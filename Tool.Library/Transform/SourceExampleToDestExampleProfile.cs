@@ -1,15 +1,23 @@
 ﻿using AutoMapper;
 using Library.DataModel;
 using System;
+using Tool.Framework.Derivation;
 using Tool.Framework.Transformation;
 using Tool.Library.Dto;
 
 namespace Tool.Library.Transform
 {
+    /// <summary>
+    /// Auto Mapper <see cref="Profile"/> for mapping <see cref="SourceExample"/> to <see cref="DestExample"/>.
+    /// </summary>
     public class SourceExampleToDestExampleProfile : Profile
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SourceExampleToDestExampleProfile" /> class.
+        /// </summary>
         public SourceExampleToDestExampleProfile()
         {
+            // add transformation rules
             CreateMap<SourceExample, DestExample>()
                 .ForPath(dest => dest.TestBool, exp => exp.MapFrom(source => bool.Parse(source.TestBool)))
                 .ForPath(dest => dest.TestByte, exp => exp.MapFrom(source => byte.Parse(source.TestByte)))
@@ -30,7 +38,7 @@ namespace Tool.Library.Transform
                 .ForPath(dest => dest.TestUint32, exp => exp.MapFrom(source => uint.Parse(source.TestUint32)))
                 .ForPath(dest => dest.TestUint64, exp => exp.MapFrom(source => ulong.Parse(source.TestUint64)))
 
-
+                // do derivation
                 .ForMember(dest => dest.TestDeriveAddedValue, exp => exp.MapFrom((source, dest) => dest.TestInt16 + dest.TestInt32))
                 .ForMember(dest => dest.TestDeriveStringToBool, exp => exp.ConvertUsing<KeyedDataValueConverter<string, YesNoLookupData, string>, string>(src => src.TestString));
         }

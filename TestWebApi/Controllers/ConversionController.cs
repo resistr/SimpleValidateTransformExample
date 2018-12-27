@@ -70,20 +70,33 @@ namespace TestApi.Controllers
         [Produces("application/xml")]
         public ActionResult Post([FromBody] SourceExample source)
         {
+            // .Net Core Web API automatically reject an invalid request.
+            // However, this was disabled in startup so this must be handled manually.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            // transform the data.
             var dest = TransformationService.Transform<DestExample>(source);
+
+            // derive the data.
             DerivationService.Derive(dest);
+
+            // hack put in place for testing post transform validation errors. 
             if (dest.TestDeriveStringToBool == bool.FalseString)
             {
                 dest.TestDeriveStringToBool = null;
             }
+
+            // validate the object after transformation.
             if (!TryValidateModel(dest))
             {
+                // handle post transformation validation errors.
                 return BadRequest(ModelState);
             }
+
+            // return the object post transformation & validation
             return Ok(dest);
         }
     }

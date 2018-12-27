@@ -37,6 +37,7 @@ namespace TestWebApi472
                 // add the client specific services (local project)
                 services.AddClientSpecificTransformations();
 
+                // add the shim to WebApi to add a service provider to validation context.
                 config.ConfigureServiceProviderValidator(services);
             });
 

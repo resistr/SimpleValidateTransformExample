@@ -5,14 +5,28 @@ using Tool.Library.Dto;
 
 namespace Tool.Library.Validation
 {
+    /// <summary>
+    /// Fluent Validation <see cref="IValidator"/> for <see cref="DestExample"/>.
+    /// </summary>
     public class DestExampleValidator : AbstractValidator<DestExample>
     {
+        /// <summary>
+        /// The DI injected <see cref="KeyedDataValidationRule{TKey, TValue}"/> for <see cref="YesNoLookupData"/>.
+        /// </summary>
         protected readonly KeyedDataValidationRule<string, YesNoLookupData> YesNoKeyedDataValidationRule;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SourceExampleValidator" /> class.
+        /// </summary>
+        /// <param name="yesNoKeyedDataValidationRule">
+        /// The <see cref="KeyedDataValidationRule{TKey, TValue}"/> for <see cref="YesNoLookupData"/>.
+        /// </param>
         public DestExampleValidator(KeyedDataValidationRule<string, YesNoLookupData> yesNoKeyedDataValidationRule)
         {
+            // let's save this for later in case something else is overriden that needs it. 
             YesNoKeyedDataValidationRule = yesNoKeyedDataValidationRule;
 
+            // add validation rules
             RuleFor(source => source.TestBool).NotDefault();
 
             RuleFor(source => source.TestByte).NotDefault();
@@ -49,7 +63,9 @@ namespace Tool.Library.Validation
 
             RuleFor(source => source.TestUint64).NotDefault();
 
-            RuleFor(source => source.TestDeriveStringToBool).NotNullOrWhiteSpace().MustAsync(YesNoKeyedDataValidationRule.ValidateValueAsync);
+            RuleFor(source => source.TestDeriveStringToBool).NotNullOrWhiteSpace()
+                // use external validation rule.
+                .MustAsync(YesNoKeyedDataValidationRule.ValidateValueAsync);
 
             RuleFor(source => source.TestDeriveAddedValue).NotDefault();
         }
