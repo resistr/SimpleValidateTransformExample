@@ -1,6 +1,6 @@
 ﻿using Framework.DataProvider;
 using Framework.Derivation;
-using Library.DataModels;
+using Library.DataModel;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;

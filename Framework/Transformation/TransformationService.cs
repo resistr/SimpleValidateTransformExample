@@ -36,7 +36,7 @@ namespace Framework.Transformation
         /// <param name="source">The source object to transform.</param>
         /// <returns>The result of the transformation.</returns>
         /// <exception cref="TransformationException">Wraps any underlying exception that may have occured.</exception>
-        public object Transform<TDest>(object source) where TDest : class
+        public TDest Transform<TDest>(object source)
         {
             try
             {

@@ -35,7 +35,7 @@ namespace Framework.Transformation
             catch (Exception ex)
             {
                 // failure; wrap the exception in a transformation exception
-                throw new TransformationException("Error running transformation.", source, Transformer, ex);
+                throw new TransformationException("Error running transformation.", source, typeof(TSource), typeof(TDest), ex);
             }
         }
     }

@@ -1,10 +1,7 @@
 ﻿using Framework.Derivation;
 using Framework.Transformation;
-using Framework.Validation;
 using Library.Dto;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace TestApi.Controllers
 {
@@ -15,24 +12,20 @@ namespace TestApi.Controllers
     [ApiController]
     public class ConversionController : ControllerBase
     {
-        protected readonly IGenericTransformationService<SourceExample, DestExample> TransformationService;
+        protected readonly ITransformationService TransformationService;
         protected readonly IDerivationService DerivationService;
-        protected readonly IValidationService ValidationService;
 
         /// <summary>
         /// Initializes a new instance of the TestWebApi.Controllers.ConversionController class.
         /// </summary>
         /// <param name="transformationService">The transformation service to test.</param>
         /// <param name="derivationService">The derivation service to test.</param>
-        /// <param name="validationService">The validation service to test.</param>
         public ConversionController(
-            IGenericTransformationService<SourceExample, DestExample> transformationService,
-            IDerivationService derivationService,
-            IValidationService validationService)
+            ITransformationService transformationService,
+            IDerivationService derivationService)
         {
             TransformationService = transformationService;
             DerivationService = derivationService;
-            ValidationService = validationService; 
         }
 
         /// <summary>
@@ -75,19 +68,23 @@ namespace TestApi.Controllers
         /// <exception cref="ValidationException">If there is an error in the validation process.</exception>
         [HttpPost]
         [Produces("application/xml")]
-        public DestExample Post([FromBody] SourceExample source)
+        public ActionResult Post([FromBody] SourceExample source)
         {
             if (!ModelState.IsValid)
             {
-                throw new Framework.Validation.ValidationException(
-                    "Source model is invalid.", 
-                    ModelState.SelectMany(state => state.Value.Errors.Select(error => new ValidationResult(error.ErrorMessage))), 
-                    source);
+                return BadRequest(ModelState);
             }
-            var dest = TransformationService.Transform(source);
+            var dest = TransformationService.Transform<DestExample>(source);
             DerivationService.Derive(dest);
-            ValidationService.Validate(dest);
-            return dest;
+            if (dest.TestDeriveStringToBool == bool.FalseString)
+            {
+                dest.TestDeriveStringToBool = null;
+            }
+            if (!TryValidateModel(dest))
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(dest);
         }
     }
 }

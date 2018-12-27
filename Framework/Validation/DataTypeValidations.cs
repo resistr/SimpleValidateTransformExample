@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Framework.Validation
 {
@@ -15,7 +14,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Bool(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(bool));
+            => DataTypeValidation.Bool(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="sbyte"/>.
@@ -24,7 +23,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Sbyte(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(sbyte));
+            => DataTypeValidation.Sbyte(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="short"/>.
@@ -33,7 +32,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Short(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(short));
+            => DataTypeValidation.Short(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="string"/>.
@@ -42,7 +41,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult String(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(string));
+            => DataTypeValidation.String(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="uint"/>.
@@ -51,7 +50,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult UInt(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(UInt32));
+            => DataTypeValidation.UInt(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="char"/>.
@@ -60,7 +59,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Char(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(char));
+            => DataTypeValidation.Char(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="long"/>.
@@ -69,7 +68,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Long(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(Int64));
+            => DataTypeValidation.Long(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="int"/>.
@@ -78,7 +77,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Int(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(int));
+            => DataTypeValidation.Int(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="ulong"/>.
@@ -87,7 +86,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult ULong(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(UInt64));
+            => DataTypeValidation.ULong(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="float"/>.
@@ -96,7 +95,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Float(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(float));
+            => DataTypeValidation.Float(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="ushort"/>.
@@ -105,7 +104,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult UShort(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(UInt16));
+            => DataTypeValidation.UShort(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="double"/>.
@@ -114,7 +113,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Double(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(double));
+            => DataTypeValidation.Double(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="byte"/>.
@@ -123,7 +122,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Byte(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(byte));
+            => DataTypeValidation.Byte(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is a <see cref="decimal"/>.
@@ -132,7 +131,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Decimal(object itemToValidate, ValidationContext context)
-            => ConvertToValidate(itemToValidate, context, typeof(decimal));
+            => DataTypeValidation.Decimal(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="TimeSpan.TryParse(string, out System.TimeSpan)"/> to validate if itemToValidate is a <see cref="System.TimeSpan"/>.
@@ -141,7 +140,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult TimeSpan(object itemToValidate, ValidationContext context)
-            => System.TimeSpan.TryParse(itemToValidate?.ToString(), out TimeSpan result) ? Success : Failure;
+            => DataTypeValidation.TimeSpan(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="DateTime.TryParse(string, out System.TimeSpan)"/> to validate if itemToValidate is a <see cref="System.DateTime"/>.
@@ -150,7 +149,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult DateTime(object itemToValidate, ValidationContext context)
-            => System.DateTime.TryParse(itemToValidate?.ToString(), out DateTime result) ? Success : Failure;
+            => DataTypeValidation.DateTime(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="DateTimeOffset.TryParse(string, out System.TimeSpan)"/> to validate if itemToValidate is a <see cref="System.DateTimeOffset"/>.
@@ -159,7 +158,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult DateTimeOffset(object itemToValidate, ValidationContext context)
-            => System.DateTimeOffset.TryParse(itemToValidate?.ToString(), out DateTimeOffset result) ? Success : Failure;
+            => DataTypeValidation.DateTimeOffset(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Uses <see cref="Guid.TryParse(string, out System.TimeSpan)"/> to validate if itemToValidate is a <see cref="System.Guid"/>.
@@ -168,28 +167,7 @@ namespace Framework.Validation
         /// <param name="context">The context of the item to validate.</param>
         /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
         public static ValidationResult Guid(object itemToValidate, ValidationContext context)
-            => System.Guid.TryParse(itemToValidate?.ToString(), out Guid result) ? Success : Failure;
-
-        /// <summary>
-        /// Uses <see cref="Convert.ChangeType(object, Type)"/> to validate if itemToValidate is the expected type.
-        /// </summary>
-        /// <param name="itemToValidate">The item to validate.</param>
-        /// <param name="context">The context of the item to validate.</param>
-        /// <param name="conversionType">The type the item to validate is expected to be.</param>
-        /// <returns>A <see cref="ValidationResult"/> indicating the result of the validation.</returns>
-        private static ValidationResult ConvertToValidate(object itemToValidate, ValidationContext context, Type conversionType)
-        {
-            try
-            {
-                var convertedValue = Convert.ChangeType(itemToValidate, conversionType);
-                return Success;
-            }
-            catch (Exception ex)
-            when (ex is InvalidCastException || ex is FormatException || ex is OverflowException || ex is ArgumentNullException)
-            {
-                return Failure;
-            }
-        }
+            => DataTypeValidation.Guid(itemToValidate) ? Success : Failure;
 
         /// <summary>
         /// Shortcut to simplify returning validation success. 

@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -189,9 +191,17 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AspNet.DependencyInjection\AspNet.DependencyInjection.csproj">
-      <Project>{fdda464b-3561-4380-aa74-6bf8afefd967}</Project>
-      <Name>AspNet.DependencyInjection</Name>
+    <ProjectReference Include="..\Framework.Common\Framework.Common.csproj">
+      <Project>{96090413-67a8-470a-a327-66f2a8a785e0}</Project>
+      <Name>Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.DependencyInjection.Shim\Framework.DependencyInjection.Shim.csproj">
+      <Project>{99770de6-0fc2-4f4a-a7b4-be6c797ce379}</Project>
+      <Name>Framework.DependencyInjection.Shim</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Transformation.Abstractions\Framework.Transformation.Abstractions.csproj">
+      <Project>{4e3d7409-14a9-4cb6-9ea5-1bbe2b246e22}</Project>
+      <Name>Framework.Transformation.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework\Framework.csproj">
       <Project>{6311ce5b-e6bb-42ac-8ed2-d876c11df736}</Project>

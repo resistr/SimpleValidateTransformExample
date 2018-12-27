@@ -1,5 +1,6 @@
-﻿using AspNet.DependencyInjection;
-using Framework;
+﻿using Framework;
+using Framework.Common;
+using Framework.DependencyInjection.Shim;
 using Library;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;

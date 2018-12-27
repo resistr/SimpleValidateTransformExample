@@ -1,10 +1,13 @@
 ﻿using Framework;
-using Library.DataModels;
-using Library.DataModels.Transform;
+using Framework.DataProvider;
+using Framework.Transformation;
+using Library.DataModel;
+using Library.DataModel.Transform;
 using Library.DataProvider;
 using Library.Dto;
 using Library.Transform;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace Library
 {
@@ -25,9 +28,15 @@ namespace Library
         {
             services.AddFrameworkServices();
 
+            //Transforms
+            services.AddSingleton<ITransform, StateLookupDataKeyValuePairTransform>();
+            services.AddSingleton<ITransform, YesNoLookupDataKeyValuePairTransform>();
+            services.AddSingleton<ITransform<StateLookupData, KeyValuePair<string, StateLookupData>>, StateLookupDataKeyValuePairTransform>();
+            services.AddSingleton<ITransform<YesNoLookupData, KeyValuePair<string, YesNoLookupData>>, YesNoLookupDataKeyValuePairTransform>();
+
             // Data services
-            services.AddCachedKeyedDataProvider<string, YesNoLookupData, YesNoLookupDataKeyValuePairTransform, YesNoLookupDataProvider>();
-            services.AddCachedKeyedDataProvider<string, StateLookupData, StateLookupDataKeyValuePairTransform, StateLookupDataProvider>();
+            services.AddCachedKeyedDataProvider<string, YesNoLookupData, YesNoLookupDataProvider>();
+            services.AddCachedKeyedDataProvider<string, StateLookupData, StateLookupDataProvider>();
 
             // Transformation services
             services.AddTransformationService<SourceExample, DestExample, SourceExampleToDestExampleTransformer>();

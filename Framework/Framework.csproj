@@ -18,4 +18,10 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.DataProvider\Framework.DataProvider.csproj" />
+    <ProjectReference Include="..\Framework.Transformation.Abstractions\Framework.Transformation.Abstractions.csproj" />
+    <ProjectReference Include="..\Framework.Validation\Framework.Validation.csproj" />
+  </ItemGroup>
+
 </Project>

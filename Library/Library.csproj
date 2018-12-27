@@ -14,6 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework\Framework.csproj" />
+    <ProjectReference Include="..\Library.DataModel\Library.DataModel.csproj" />
+    <ProjectReference Include="..\Library.DataProvider\Library.DataProvider.csproj" />
   </ItemGroup>
 
 </Project>

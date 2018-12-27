@@ -71,7 +71,7 @@ namespace Framework.Transformation
             {
                 // some unknown error occured in the transformation process; wrap it in a ValidationException
                 // likely a transform had an uncaught exception
-                throw new TransformationException("Error transforming.", source, this, ex);
+                throw new TransformationException("Error transforming.", source, typeof(TSource), typeof(TDest), ex);
             }
         }
     }
