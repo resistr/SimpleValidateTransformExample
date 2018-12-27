@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Http.Validation.Providers;
 
-namespace Framework.DependencyInjection.Shim
+namespace Framework.Validation.Shim
 {
     /// <summary>
     /// Represents an implementation of System.Web.Http.Validation.ModelValidatorProvider

@@ -1,32 +1,28 @@
-﻿using Framework;
+﻿using AutoMapper;
+using FluentValidation;
+using FluentValidation.WebApi;
 using Framework.Common;
 using Framework.DependencyInjection.Shim;
-using Framework.Validation.Shim;
-using Library;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Web.Http;
+using Tool.Framework;
+using Tool.Framework.Validation.Shim;
+using Tool.Library;
+using Tool.Library.Validation;
 
-namespace TestWebApi472
+namespace Tool.TestWebApi472
 {
-    /// <summary>
-    /// Static class providing the configuration implementation for <see cref="HttpConfiguration"/>.
-    /// </summary>
     public static class WebApiConfig
     {
-        /// <summary>
-        /// Configures <see cref="HttpConfiguration"/> for the application. 
-        /// </summary>
-        /// <param name="config">The <see cref="HttpConfiguration"/> to configure.</param>
-        public static void Configure(HttpConfiguration config)
+        public static void Register(HttpConfiguration config)
         {
-
             // Turn on XML seralization for WebApi
             config.Formatters.XmlFormatter.UseXmlSerializer = true;
 
             // add dependency resolution to the application 
             // based on Microsoft.Extensions.DependencyInjection
-            config.BuildDependencyResolver(services => {
+            var serviceProvider = config.BuildDependencyResolver(services => {
 
                 // add a default memory cache based on Microsoft.Extensions.Caching.Memory
                 services.AddMemoryCache();
@@ -34,16 +30,25 @@ namespace TestWebApi472
                 // add the default framework services (local project)
                 services.AddFrameworkServices();
 
+                services.AddAutoMapper(typeof(Library.Transform.SourceExampleToDestExampleProfile).Assembly);
+
                 // add the client specific services (local project)
                 services.AddClientSpecificTransformations();
 
-                config.ConfigureServiceProviderValidator(services);
+                foreach (var assemblyScanResult in AssemblyScanner.FindValidatorsInAssemblyContaining<SourceExampleValidator>())
+                {
+                    services.AddTransient(assemblyScanResult.InterfaceType, assemblyScanResult.ValidatorType);
+                }
             });
 
-            // configure attribute based routing
+            FluentValidationModelValidatorProvider.Configure(config, provider => 
+            {
+                provider.ValidatorFactory = new ValidatorFactory(serviceProvider);
+            });
+
+            // Web API routes
             config.MapHttpAttributeRoutes();
 
-            // configure a default route.
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Web.Http;
-using System.Web.Http.Validation;
 
 namespace Framework.DependencyInjection.Shim
 {
@@ -18,7 +17,7 @@ namespace Framework.DependencyInjection.Shim
         /// <param name="config">The System.Web.Http.HttpConfiguration to build the dependency resolver for.</param>
         /// <param name="serviceAction">The actions to take against the service collection. (Register service here)</param>
         /// <returns>The System.Web.Http.HttpConfiguration provided.</returns>
-        public static HttpConfiguration BuildDependencyResolver(this HttpConfiguration config, Action<IServiceCollection> serviceAction)
+        public static IServiceProvider BuildDependencyResolver(this HttpConfiguration config, Action<IServiceCollection> serviceAction)
         {
             // Build a new service collection. 
             var services = new ServiceCollection();
@@ -38,20 +37,16 @@ namespace Framework.DependencyInjection.Shim
                 services.AddTransient(type);
             }
 
-            // remove the default ModelValidatorProvider
-            config.Services.Clear(typeof(ModelValidatorProvider));
-
-            // register ate service provider ModelValidatorProvider
-            services.AddTransient<ModelValidatorProvider, ServiceProviderDataAnnotationsModelValidatorProvider>();
-
             // provide a method for accessing the provider by injecting IServiceProvider
             services.AddTransient(provider => provider);
 
-            // set the default dependency resolver to the new service collection. 
-            config.DependencyResolver = new ServiceProviderDependencyResolver(services.BuildServiceProvider());
+            var serviceProvider = services.BuildServiceProvider();
 
-            // return the config for chaining. 
-            return config;
+            // set the default dependency resolver to the new service collection. 
+            config.DependencyResolver = new ServiceProviderDependencyResolver(serviceProvider);
+
+            // return the service provider for use. 
+            return serviceProvider;
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Web.Http.Metadata;
 using System.Web.Http.Validation;
 using System.Web.Http.Validation.Validators;
 
-namespace Framework.DependencyInjection.Shim
+namespace Framework.Validation.Shim
 {
     /// <summary>
     /// A System.Web.Http.Validation.ModelValidator based on DataAnnotationsModelValidator; 

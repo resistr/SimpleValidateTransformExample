@@ -15,31 +15,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Initial Example", "Initial 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tool Based Example", "Tool Based Example", "{E715FBF2-0818-49F3-A8F9-AC0874609CB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool.Library", "Tool.Library\Tool.Library.csproj", "{0EBF933F-3AC3-42E9-96FB-69CECA75DD29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool.Library", "Tool.Library\Tool.Library.csproj", "{0EBF933F-3AC3-42E9-96FB-69CECA75DD29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{8E17B8A7-1B6A-4666-B0EF-D26A4287BEA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.DataProvider", "Framework.DataProvider\Framework.DataProvider.csproj", "{378533ED-A934-47F1-ADBA-31D528DF97B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DataProvider", "Framework.DataProvider\Framework.DataProvider.csproj", "{378533ED-A934-47F1-ADBA-31D528DF97B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Async", "Framework.Async\Framework.Async.csproj", "{8E24B4E7-24F0-4598-8535-0A11EF0E3712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Async", "Framework.Async\Framework.Async.csproj", "{8E24B4E7-24F0-4598-8535-0A11EF0E3712}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Validation", "Framework.Validation\Framework.Validation.csproj", "{71056047-49A5-40EF-9C1C-F2340C2199B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Validation", "Framework.Validation\Framework.Validation.csproj", "{71056047-49A5-40EF-9C1C-F2340C2199B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.DependencyInjection.Shim", "Framework.DependencyInjection.Shim\Framework.DependencyInjection.Shim.csproj", "{99770DE6-0FC2-4F4A-A7B4-BE6C797CE379}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.DataProvider", "Library.DataProvider\Library.DataProvider.csproj", "{B12C215A-38B8-4586-9D7E-42EF2752BCF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.DataProvider", "Library.DataProvider\Library.DataProvider.csproj", "{B12C215A-38B8-4586-9D7E-42EF2752BCF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.DataModel", "Library.DataModel\Library.DataModel.csproj", "{9CB61B76-986D-4B92-A125-1E9834B7D3E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.DataModel", "Library.DataModel\Library.DataModel.csproj", "{9CB61B76-986D-4B92-A125-1E9834B7D3E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.DataProvider.Abstractions", "Framework.DataProvider.Abstractions\Framework.DataProvider.Abstractions.csproj", "{AD90FE43-C153-4C52-A6CC-8C2750C23F8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DataProvider.Abstractions", "Framework.DataProvider.Abstractions\Framework.DataProvider.Abstractions.csproj", "{AD90FE43-C153-4C52-A6CC-8C2750C23F8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Common", "Framework.Common\Framework.Common.csproj", "{96090413-67A8-470A-A327-66F2A8A785E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Common", "Framework.Common\Framework.Common.csproj", "{96090413-67A8-470A-A327-66F2A8A785E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Transformation.Abstractions", "Framework.Transformation.Abstractions\Framework.Transformation.Abstractions.csproj", "{4E3D7409-14A9-4CB6-9EA5-1BBE2B246E22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Transformation.Abstractions", "Framework.Transformation.Abstractions\Framework.Transformation.Abstractions.csproj", "{4E3D7409-14A9-4CB6-9EA5-1BBE2B246E22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool.Framework", "Tool.Framework\Tool.Framework.csproj", "{436A458D-04EC-4006-9930-E483FB0308F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool.Framework", "Tool.Framework\Tool.Framework.csproj", "{436A458D-04EC-4006-9930-E483FB0308F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool.TestWebApi", "Tool.TestWebApi\Tool.TestWebApi.csproj", "{02E323C3-CE9E-40C8-973E-7E3D7FE90F94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool.TestWebApi", "Tool.TestWebApi\Tool.TestWebApi.csproj", "{02E323C3-CE9E-40C8-973E-7E3D7FE90F94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool.TestWebApi472", "Tool.TestWebApi472\Tool.TestWebApi472.csproj", "{0CE524DD-195C-4357-8DD1-A06ABBB36BBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Validation.Shim", "Framework.Validation.Shim\Framework.Validation.Shim.csproj", "{F8595DEF-0EE8-46DF-92DF-0DBF8448FDB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool.Framework.Validation.Shim", "Tool.Framework.Validation.Shim\Tool.Framework.Validation.Shim.csproj", "{8DF61C66-F3AC-4A57-863F-DD60C34B8E33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +117,18 @@ Global
 		{02E323C3-CE9E-40C8-973E-7E3D7FE90F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02E323C3-CE9E-40C8-973E-7E3D7FE90F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02E323C3-CE9E-40C8-973E-7E3D7FE90F94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CE524DD-195C-4357-8DD1-A06ABBB36BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CE524DD-195C-4357-8DD1-A06ABBB36BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CE524DD-195C-4357-8DD1-A06ABBB36BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CE524DD-195C-4357-8DD1-A06ABBB36BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8595DEF-0EE8-46DF-92DF-0DBF8448FDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8595DEF-0EE8-46DF-92DF-0DBF8448FDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8595DEF-0EE8-46DF-92DF-0DBF8448FDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8595DEF-0EE8-46DF-92DF-0DBF8448FDB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DF61C66-F3AC-4A57-863F-DD60C34B8E33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DF61C66-F3AC-4A57-863F-DD60C34B8E33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DF61C66-F3AC-4A57-863F-DD60C34B8E33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DF61C66-F3AC-4A57-863F-DD60C34B8E33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +150,9 @@ Global
 		{4E3D7409-14A9-4CB6-9EA5-1BBE2B246E22} = {8E17B8A7-1B6A-4666-B0EF-D26A4287BEA2}
 		{436A458D-04EC-4006-9930-E483FB0308F7} = {E715FBF2-0818-49F3-A8F9-AC0874609CB9}
 		{02E323C3-CE9E-40C8-973E-7E3D7FE90F94} = {E715FBF2-0818-49F3-A8F9-AC0874609CB9}
+		{0CE524DD-195C-4357-8DD1-A06ABBB36BBB} = {E715FBF2-0818-49F3-A8F9-AC0874609CB9}
+		{F8595DEF-0EE8-46DF-92DF-0DBF8448FDB7} = {EEE09C8A-BB83-489A-9B9B-CDDBE151D36B}
+		{8DF61C66-F3AC-4A57-863F-DD60C34B8E33} = {E715FBF2-0818-49F3-A8F9-AC0874609CB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {406EC97A-59F5-41EB-A0BE-EA09F4A24392}

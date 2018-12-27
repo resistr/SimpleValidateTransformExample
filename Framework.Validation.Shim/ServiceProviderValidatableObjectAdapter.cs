@@ -6,7 +6,7 @@ using System.Web.Http.Metadata;
 using System.Web.Http.Validation;
 using System.Web.Http.Validation.Validators;
 
-namespace Framework.DependencyInjection.Shim
+namespace Framework.Validation.Shim
 {
     /// <summary>
     /// Provides an object adapter that can be validated.

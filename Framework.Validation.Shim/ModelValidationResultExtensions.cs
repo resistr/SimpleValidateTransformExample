@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Http.Validation;
 
-namespace Framework.DependencyInjection.Shim
+namespace Framework.Validation.Shim
 {
 
     public static class ModelValidationResultExtensions
