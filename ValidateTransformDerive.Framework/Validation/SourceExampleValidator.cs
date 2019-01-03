@@ -8,12 +8,20 @@ namespace ValidateTransformDerive.Framework.Validation
     /// </summary>
     public class SourceExampleValidator : AbstractValidator<SourceExample>
     {
+        protected readonly IValidator<Address> AddressValidator;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SourceExampleValidator" /> class.
         /// </summary>
-        public SourceExampleValidator()
+        public SourceExampleValidator(IValidator<Address> addressValidator)
         {
+            AddressValidator = addressValidator;
+
             // add validation rules
+            RuleFor(source => source.Addresses).Required();
+
+            RuleForEach(source => source.Addresses).SetValidator(AddressValidator);
+
             RuleFor(source => source.TestBool).Required().IsBool();
 
             RuleFor(source => source.TestByte).Required().IsByte();

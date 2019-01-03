@@ -1,4 +1,6 @@
-﻿using ValidateTransformDerive.Framework.DataProvider;
+﻿using FluentValidation;
+using ValidateTransformDerive.Framework.DataProvider;
+using ValidateTransformDerive.Framework.Dto;
 using ValidateTransformDerive.Framework.Validation;
 using ValidateTransformDerive.ImplementationSpecific.DataModel;
 
@@ -20,8 +22,9 @@ namespace ValidateTransformDerive.ImplementationSpecific.Validation
         /// <param name="yesNoKeyedDataValidationRule">
         /// The <see cref="IKeyedDataValidationRule{TKey, TValue}"/> for <see cref="YesNoLookupData"/>.
         /// </param>
-        public SourceExampleValidator(IProvideKeyedData<YesNoLookupData, string, string> yesNoKeyedData)
-            : base()
+        public SourceExampleValidator(IProvideKeyedData<YesNoLookupData, string, string> yesNoKeyedData,
+            IValidator<Address> addressValidator)
+            : base(addressValidator)
         {
             // let's save this for later in case something else is overriden that needs it. 
             YesNoKeyedData = yesNoKeyedData;

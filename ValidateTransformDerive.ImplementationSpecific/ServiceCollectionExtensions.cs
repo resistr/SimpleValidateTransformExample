@@ -31,6 +31,7 @@ namespace ValidateTransformDerive.ImplementationSpecific
             services.AddCachedKeyedDataProvider<string, string, StateLookupData, StateLookupDataProvider, StateLookupDataKeyValuePairTransform>();
 
             // add validation.
+            services.AddValidator<Address, AddressValidator>();
             services.AddValidator<SourceExample, Validation.SourceExampleValidator>();
             services.AddValidator<DestExample, DestExampleValidator>();
 

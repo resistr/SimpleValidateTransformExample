@@ -107,6 +107,7 @@
     <Compile Include="DependencyInjection\ServiceProviderDependencyResolver.cs" />
     <Compile Include="DependencyInjection\ServiceProviderScopedDependencyResolver.cs" />
     <Compile Include="Derivation\ServiceCollectionExtensions.cs" />
+    <Compile Include="Dto\Address.cs" />
     <Compile Include="Dto\SourceExample.cs" />
     <Compile Include="IHaveStartupActions.cs" />
     <Compile Include="KeyValuePairExtensions.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Validation\RequiredValidationRule.cs" />
     <Compile Include="Validation\RuleBuilderOptionsExtensions.cs" />
     <Compile Include="Validation\ServiceCollectionExtensions.cs" />
+    <Compile Include="Validation\AddressValidator.cs" />
     <Compile Include="Validation\SourceExampleValidator.cs" />
     <Compile Include="Validation\ValidatorFactory.cs" />
   </ItemGroup>

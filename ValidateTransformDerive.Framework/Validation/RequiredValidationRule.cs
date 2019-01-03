@@ -27,12 +27,12 @@ namespace ValidateTransformDerive.Framework.Validation
         public static IRuleBuilderOptions<T, TProperty> Required<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, bool allowDefault = false)
             => ruleBuilder.Must(prop => 
             {
-                var isValid = prop == null;
+                var isValid = prop != null;
                 if (isValid && prop is string propAsString)
                 {
                     isValid = !string.IsNullOrWhiteSpace(propAsString);
                 }
-                if (!allowDefault)
+                if (isValid && !allowDefault)
                 {
                     var underlyingType = Nullable.GetUnderlyingType(typeof(TProperty));
                     if (underlyingType != null)
@@ -46,6 +46,10 @@ namespace ValidateTransformDerive.Framework.Validation
                     {
                         isValid = prop != default;
                     }
+                }
+                if (isValid && prop is Array propAsArray)
+                {
+                    isValid = propAsArray?.Length > 0;
                 }
                 return isValid;
             }).CreateMessageCode(nameof(Required));

@@ -8,6 +8,9 @@ namespace ValidateTransformDerive.Framework.Dto
     [DataContract]
     public class SourceExample
     {
+        [DataMember(EmitDefaultValue = false, IsRequired = false, Name = nameof(Addresses))]
+        public Address[] Addresses { get; set; }
+
         [DataMember(EmitDefaultValue = false, IsRequired = false, Name = nameof(TestBool))]
         public string TestBool { get; set; }
 

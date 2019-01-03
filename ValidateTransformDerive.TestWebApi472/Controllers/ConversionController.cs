@@ -39,6 +39,10 @@ namespace Tool.TestWebApi472.Controllers
         public SourceExample Get()
             => new SourceExample
             {
+                Addresses = new[]
+                {
+                    new Address { City = "city", FirstLine = "first line", PostalCode = "postal code", State = "state" }
+                },
                 TestDecimal = "1.14",
                 TestChar = "X",
                 TestFloat = "4.11",

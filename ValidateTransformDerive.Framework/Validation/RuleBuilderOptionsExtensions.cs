@@ -19,6 +19,6 @@ namespace ValidateTransformDerive.Framework.Validation
             this IRuleBuilderOptions<T, TProperty> rule, 
             string validationMethodName
             )
-            => rule.WithMessage($"{typeof(T).Name}.{{PropertyName}}.{validationMethodName}");
+            => rule.WithMessage(validationMethodName);
     }
 }

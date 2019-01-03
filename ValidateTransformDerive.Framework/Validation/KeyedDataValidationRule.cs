@@ -24,7 +24,7 @@ namespace ValidateTransformDerive.Framework.Validation
             where TData : IProvideKey<TKey>, IProvideValue<TValue>
             where TProperty : TKey
             => rule.MustAsync(async (source, cancellationToken) =>
-                (await keyedDataProvider.GetTypedReadOnlyDictionaryAsync()).ContainsKey(source))
+                source == null ? false : (await keyedDataProvider.GetTypedReadOnlyDictionaryAsync()).ContainsKey(source))
                 .CreateMessageCode($"{nameof(ValidateKey)}.{typeof(TData).Name}");
 
         /// <summary>
