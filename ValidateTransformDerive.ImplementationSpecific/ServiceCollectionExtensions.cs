@@ -26,16 +26,9 @@ namespace ValidateTransformDerive.ImplementationSpecific
         /// <param name="services">The service collection to register the services to.</param>
         public static void AddClientSpecificTransformations(this IServiceCollection services)
         {
-            // add any data provider transformations
-            services.AddTransformationService<YesNoLookupData, KeyValuePair<string, YesNoLookupData>, YesNoLookupDataKeyValuePairTransform>();
-            services.AddTransformationService<StateLookupData, KeyValuePair<string, StateLookupData>, StateLookupDataKeyValuePairTransform>();
-
             // add any data providers
-            services.AddCachedKeyedDataProvider<string, YesNoLookupData, YesNoLookupDataProvider>();
-            services.AddCachedKeyedDataProvider<string, StateLookupData, StateLookupDataProvider>();
-
-            // add validation helpers.
-            services.AddKeyedDataValidator<string, YesNoLookupData>();
+            services.AddCachedKeyedDataProvider<string, string, YesNoLookupData, YesNoLookupDataProvider, YesNoLookupDataKeyValuePairTransform>();
+            services.AddCachedKeyedDataProvider<string, string, StateLookupData, StateLookupDataProvider, StateLookupDataKeyValuePairTransform>();
 
             // add validation.
             services.AddValidator<SourceExample, Validation.SourceExampleValidator>();

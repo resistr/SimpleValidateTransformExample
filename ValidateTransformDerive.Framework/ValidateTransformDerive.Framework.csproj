@@ -100,6 +100,7 @@
     <Compile Include="DataProvider\IProvideCachedData.cs" />
     <Compile Include="DataProvider\IProvideData.cs" />
     <Compile Include="DataProvider\IProvideKeyedData.cs" />
+    <Compile Include="DataProvider\IProvideKey.cs" />
     <Compile Include="DataProvider\IProvideValue.cs" />
     <Compile Include="DataProvider\ServiceCollectionExtensions.cs" />
     <Compile Include="DependencyInjection\HttpConfigurationExtensions.cs" />
@@ -122,11 +123,10 @@
     <Compile Include="Transformation\ITransform.cs" />
     <Compile Include="Transformation\ITransformationService.cs" />
     <Compile Include="Transformation\TransformerBase.cs" />
-    <Compile Include="Validation\DataTypeValidation.cs" />
-    <Compile Include="Validation\IKeyedDataValidationRule.cs" />
+    <Compile Include="Validation\DataTypeValidationRule.cs" />
     <Compile Include="Validation\KeyedDataValidationRule.cs" />
-    <Compile Include="Validation\NotDefaultValidationRule.cs" />
-    <Compile Include="Validation\NotNullOrWhitespaceValidationRule.cs" />
+    <Compile Include="Validation\RequiredValidationRule.cs" />
+    <Compile Include="Validation\RuleBuilderOptionsExtensions.cs" />
     <Compile Include="Validation\ServiceCollectionExtensions.cs" />
     <Compile Include="Validation\SourceExampleValidator.cs" />
     <Compile Include="Validation\ValidatorFactory.cs" />

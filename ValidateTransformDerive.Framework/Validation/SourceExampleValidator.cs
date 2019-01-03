@@ -14,43 +14,43 @@ namespace ValidateTransformDerive.Framework.Validation
         public SourceExampleValidator()
         {
             // add validation rules
-            RuleFor(source => source.TestBool).NotNullOrWhiteSpace().Must(DataTypeValidation.Bool);
+            RuleFor(source => source.TestBool).Required().IsBool();
 
-            RuleFor(source => source.TestByte).NotNullOrWhiteSpace().Must(DataTypeValidation.Byte);
+            RuleFor(source => source.TestByte).Required().IsByte();
 
-            RuleFor(source => source.TestChar).NotNullOrWhiteSpace().Must(DataTypeValidation.Char);
+            RuleFor(source => source.TestChar).Required().IsChar();
 
-            RuleFor(source => source.TestDateTime).NotNullOrWhiteSpace().Must(DataTypeValidation.DateTime);
+            RuleFor(source => source.TestDateTime).Required().IsDateTime();
 
-            RuleFor(source => source.TestDateTimeOffset).NotNullOrWhiteSpace().Must(DataTypeValidation.DateTimeOffset);
+            RuleFor(source => source.TestDateTimeOffset).Required().IsDateTimeOffset();
 
-            RuleFor(source => source.TestDecimal).NotNullOrWhiteSpace().Must(DataTypeValidation.Decimal);
+            RuleFor(source => source.TestDecimal).Required().IsDecimal();
 
-            RuleFor(source => source.TestDouble).NotNullOrWhiteSpace().Must(DataTypeValidation.Double);
+            RuleFor(source => source.TestDouble).Required().IsDouble();
 
-            RuleFor(source => source.TestFloat).NotNullOrWhiteSpace().Must(DataTypeValidation.Float);
+            RuleFor(source => source.TestFloat).Required().IsFloat();
 
-            RuleFor(source => source.TestGuid).NotNullOrWhiteSpace().Must(DataTypeValidation.Guid);
+            RuleFor(source => source.TestGuid).Required().IsGuid();
 
-            RuleFor(source => source.TestInt16).NotNullOrWhiteSpace().Must(DataTypeValidation.Short);
+            RuleFor(source => source.TestInt16).Required().IsShort();
 
-            RuleFor(source => source.TestInt32).NotNullOrWhiteSpace().Must(DataTypeValidation.Int);
+            RuleFor(source => source.TestInt32).Required().IsInt();
 
-            RuleFor(source => source.TestInt64).NotNullOrWhiteSpace().Must(DataTypeValidation.Long);
+            RuleFor(source => source.TestInt64).Required().IsLong();
 
-            RuleFor(source => source.TestSbyte).NotNullOrWhiteSpace().Must(DataTypeValidation.Sbyte);
+            RuleFor(source => source.TestSbyte).Required().IsSByte();
 
-            RuleFor(source => source.TestSingle).NotNullOrWhiteSpace().Must(DataTypeValidation.Float);
+            RuleFor(source => source.TestSingle).Required().IsFloat();
 
-            RuleFor(source => source.TestString).NotNullOrWhiteSpace().Must(DataTypeValidation.String);
+            RuleFor(source => source.TestString).Required().IsString();
 
-            RuleFor(source => source.TestTimeSpan).NotNullOrWhiteSpace().Must(DataTypeValidation.TimeSpan);
+            RuleFor(source => source.TestTimeSpan).Required().IsTimeSpan();
 
-            RuleFor(source => source.TestUint16).NotNullOrWhiteSpace().Must(DataTypeValidation.UShort);
+            RuleFor(source => source.TestUint16).Required().IsUShort();
 
-            RuleFor(source => source.TestUint32).NotNullOrWhiteSpace().Must(DataTypeValidation.UInt);
+            RuleFor(source => source.TestUint32).Required().IsUInt();
 
-            RuleFor(source => source.TestUint64).NotNullOrWhiteSpace().Must(DataTypeValidation.ULong);
+            RuleFor(source => source.TestUint64).Required().IsULong();
         }
     }
 }

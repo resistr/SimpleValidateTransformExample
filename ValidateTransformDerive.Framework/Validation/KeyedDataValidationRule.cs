@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+using System.Linq;
 using ValidateTransformDerive.Framework.DataProvider;
 
 namespace ValidateTransformDerive.Framework.Validation
@@ -8,45 +7,42 @@ namespace ValidateTransformDerive.Framework.Validation
     /// <summary>
     /// A validation rule for validating keyed data.
     /// </summary>
-    /// <typeparam name="TKey">The type of the key.</typeparam>
-    /// <typeparam name="TValue">The type of the value; must implement <see cref="IProvideValue"/>.</typeparam>
-    public class KeyedDataValidationRule<TKey, TValue> : IKeyedDataValidationRule<TKey, TValue>
-        where TValue : IProvideValue
+    public static class KeyedDataValidationRule
     {
         /// <summary>
-        /// The DI injected <see cref="IProvideKeyedData{TKey, TValue}"/> to use for validation.
+        /// Validates if the value is present in the provided data by key.
         /// </summary>
-        protected readonly IProvideKeyedData<TKey, TValue> KeyedDataProvider;
+        /// <typeparam name="T">The source type of the item being validated.</typeparam>
+        /// <typeparam name="TProperty">The source type of the property being validated.</typeparam>
+        /// <typeparam name="TData">The type of the data in the keyed value provider.</typeparam>
+        /// <param name="ruleBuilder">The rule builder to add the rule to.</param>
+        /// <param name="keyedDataProvider">The data provider for the rule.</param>
+        /// <returns><see cref="IRuleBuilderOptions{T, TProperty}"/> for the new rule.</returns>
+        public static IRuleBuilderOptions<T, TProperty> ValidateKey<T, TProperty, TData, TKey, TValue>
+            (this IRuleBuilderOptions<T, TProperty> rule,
+            IProvideKeyedData<TData, TKey, TValue> keyedDataProvider)
+            where TData : IProvideKey<TKey>, IProvideValue<TValue>
+            where TProperty : TKey
+            => rule.MustAsync(async (source, cancellationToken) =>
+                (await keyedDataProvider.GetTypedReadOnlyDictionaryAsync()).ContainsKey(source))
+                .CreateMessageCode($"{nameof(ValidateKey)}.{typeof(TData).Name}");
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="KeyedDataValidationRule{TKey, TValue}" /> class.
+        /// Validates if the value is present in the provided data by value.
         /// </summary>
-        /// <param name="keyedDataProvider">
-        /// The <see cref="IProvideKeyedData{TKey, TValue}"/> to use for validation.
-        /// </param>
-        public KeyedDataValidationRule(IProvideKeyedData<TKey, TValue> keyedDataProvider)
-            => KeyedDataProvider = keyedDataProvider;
-
-        /// <summary>
-        /// Validates if the key is present in the provided data.
-        /// </summary>
-        /// <param name="source">The key to validate.</param>
-        /// <param name="cancellationToken">
-        /// The cancellation token used to determine if the asynchronous operation should be canceled.
-        /// </param>
-        /// <returns>A task representing the result of the validation.</returns>
-        public async Task<bool> ValidateKeyAsync(TKey source, CancellationToken cancellationToken = default)
-            => (await KeyedDataProvider.GetTypedReadOnlyDictionaryAsync()).ContainsKey(source);
-
-        /// <summary>
-        /// Validates if the value is present in the provided data.
-        /// </summary>
-        /// <param name="source">The value to validate.</param>
-        /// <param name="cancellationToken">
-        /// The cancellation token used to determine if the asynchronous operation should be canceled.
-        /// </param>
-        /// <returns>A task representing the result of the validation.</returns>
-        public async Task<bool> ValidateValueAsync(object source, CancellationToken cancellationToken = default)
-            => (await KeyedDataProvider.GetTypedReadOnlyDictionaryAsync()).Values.Any(value => value.GetValue() == source);
+        /// <typeparam name="T">The source type of the item being validated.</typeparam>
+        /// <typeparam name="TProperty">The source type of the property being validated.</typeparam>
+        /// <typeparam name="TData">The type of the data in the keyed value provider.</typeparam>
+        /// <param name="ruleBuilder">The rule builder to add the rule to.</param>
+        /// <param name="keyedDataProvider">The data provider for the rule.</param>
+        /// <returns><see cref="IRuleBuilderOptions{T, TProperty}"/> for the new rule.</returns>
+        public static IRuleBuilderOptions<T, TProperty> ValidateValue<T, TProperty, TData, TKey, TValue>
+            (this IRuleBuilderOptions<T, TProperty> ruleBuilder,
+            IProvideKeyedData<TData, TKey, TValue> keyedDataProvider)
+            where TData : IProvideKey<TKey>, IProvideValue<TValue>
+            where TProperty : TValue
+            => ruleBuilder.MustAsync(async (source, cancellationToken) =>
+                (await keyedDataProvider.GetTypedReadOnlyDictionaryAsync()).Values.Any(value => value.Value.Equals(source)))
+            .CreateMessageCode($"{nameof(ValidateValue)}.{typeof(TData).Name}");
     }
 }

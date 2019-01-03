@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+﻿using ValidateTransformDerive.Framework.DataProvider;
 using ValidateTransformDerive.Framework.Validation;
 using ValidateTransformDerive.ImplementationSpecific.DataModel;
 
@@ -10,9 +10,9 @@ namespace ValidateTransformDerive.ImplementationSpecific.Validation
     public class SourceExampleValidator : Framework.Validation.SourceExampleValidator
     {
         /// <summary>
-        /// The DI injected <see cref="IKeyedDataValidationRule{TKey, TValue}"/> for <see cref="YesNoLookupData"/>.
+        /// The DI injected <see cref="IProvideKeyedData{YesNoLookupData}"/> to use for validation.
         /// </summary>
-        protected readonly IKeyedDataValidationRule<string, YesNoLookupData> YesNoKeyedDataValidationRule;
+        protected readonly IProvideKeyedData<YesNoLookupData, string, string> YesNoKeyedData;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SourceExampleValidator" /> class.
@@ -20,16 +20,14 @@ namespace ValidateTransformDerive.ImplementationSpecific.Validation
         /// <param name="yesNoKeyedDataValidationRule">
         /// The <see cref="IKeyedDataValidationRule{TKey, TValue}"/> for <see cref="YesNoLookupData"/>.
         /// </param>
-        public SourceExampleValidator(IKeyedDataValidationRule<string, YesNoLookupData> yesNoKeyedDataValidationRule)
+        public SourceExampleValidator(IProvideKeyedData<YesNoLookupData, string, string> yesNoKeyedData)
             : base()
         {
             // let's save this for later in case something else is overriden that needs it. 
-            YesNoKeyedDataValidationRule = yesNoKeyedDataValidationRule;
+            YesNoKeyedData = yesNoKeyedData;
 
             // add validation rules
-            RuleFor(source => source.TestString)
-                // use external validation rule.
-                .MustAsync(YesNoKeyedDataValidationRule.ValidateKeyAsync);
+            RuleFor(source => source.TestString).Required().ValidateKey(YesNoKeyedData);
         }
     }
 }

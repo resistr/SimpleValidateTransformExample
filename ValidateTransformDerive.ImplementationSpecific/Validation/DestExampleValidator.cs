@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using ValidateTransformDerive.Framework.DataProvider;
 using ValidateTransformDerive.Framework.Validation;
 using ValidateTransformDerive.ImplementationSpecific.DataModel;
 using ValidateTransformDerive.ImplementationSpecific.Dto;
@@ -11,63 +12,56 @@ namespace ValidateTransformDerive.ImplementationSpecific.Validation
     public class DestExampleValidator : AbstractValidator<DestExample>
     {
         /// <summary>
-        /// The DI injected <see cref="KeyedDataValidationRule{TKey, TValue}"/> for <see cref="YesNoLookupData"/>.
+        /// The DI injected <see cref="IProvideKeyedData{YesNoLookupData}"/> to use for validation.
         /// </summary>
-        protected readonly IKeyedDataValidationRule<string, YesNoLookupData> YesNoKeyedDataValidationRule;
+        protected readonly IProvideKeyedData<YesNoLookupData, string, string> YesNoKeyedData;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SourceExampleValidator" /> class.
-        /// </summary>
-        /// <param name="yesNoKeyedDataValidationRule">
-        /// The <see cref="IKeyedDataValidationRule{TKey, TValue}"/> for <see cref="YesNoLookupData"/>.
-        /// </param>
-        public DestExampleValidator(IKeyedDataValidationRule<string, YesNoLookupData> yesNoKeyedDataValidationRule)
+        public DestExampleValidator(IProvideKeyedData<YesNoLookupData, string, string> yesNoKeyedData)
         {
             // let's save this for later in case something else is overriden that needs it. 
-            YesNoKeyedDataValidationRule = yesNoKeyedDataValidationRule;
+            YesNoKeyedData = yesNoKeyedData;
 
             // add validation rules
-            RuleFor(source => source.TestBool).NotDefault();
+            RuleFor(source => source.TestBool).Required();
 
-            RuleFor(source => source.TestByte).NotDefault();
+            RuleFor(source => source.TestByte).Required();
 
-            RuleFor(source => source.TestChar).NotDefault();
+            RuleFor(source => source.TestChar).Required();
 
-            RuleFor(source => source.TestDateTime).NotDefault();
+            RuleFor(source => source.TestDateTime).Required();
 
-            RuleFor(source => source.TestDateTimeOffset).NotDefault();
+            RuleFor(source => source.TestDateTimeOffset).Required();
 
-            RuleFor(source => source.TestDecimal).NotDefault();
+            RuleFor(source => source.TestDecimal).Required();
 
-            RuleFor(source => source.TestDouble).NotDefault();
+            RuleFor(source => source.TestDouble).Required();
 
-            RuleFor(source => source.TestFloat).NotDefault();
+            RuleFor(source => source.TestFloat).Required();
 
-            RuleFor(source => source.TestGuid).NotDefault();
+            RuleFor(source => source.TestGuid).Required();
 
-            RuleFor(source => source.TestInt16).NotDefault();
+            RuleFor(source => source.TestInt16).Required();
 
-            RuleFor(source => source.TestInt32).NotDefault();
+            RuleFor(source => source.TestInt32).Required();
 
-            RuleFor(source => source.TestInt64).NotDefault();
+            RuleFor(source => source.TestInt64).Required();
 
-            RuleFor(source => source.TestSbyte).NotDefault();
+            RuleFor(source => source.TestSbyte).Required();
 
-            RuleFor(source => source.TestSingle).NotDefault();
+            RuleFor(source => source.TestSingle).Required();
 
-            RuleFor(source => source.TestTimeSpan).NotDefault();
+            RuleFor(source => source.TestTimeSpan).Required();
 
-            RuleFor(source => source.TestUint16).NotDefault();
+            RuleFor(source => source.TestUint16).Required();
 
-            RuleFor(source => source.TestUint32).NotDefault();
+            RuleFor(source => source.TestUint32).Required();
 
-            RuleFor(source => source.TestUint64).NotDefault();
+            RuleFor(source => source.TestUint64).Required();
 
-            RuleFor(source => source.TestDeriveStringToBool).NotNullOrWhiteSpace()
-                // use external validation rule.
-                .MustAsync(YesNoKeyedDataValidationRule.ValidateValueAsync);
+            RuleFor(source => source.TestDeriveStringToBool).Required()
+                .ValidateValue(YesNoKeyedData);
 
-            RuleFor(source => source.TestDeriveAddedValue).NotDefault();
+            RuleFor(source => source.TestDeriveAddedValue).Required();
         }
     }
 }

@@ -16,9 +16,9 @@ namespace ValidateTransformDerive.ImplementationSpecific.Transform
         /// <summary>
         /// The DI provided <see cref="IProvideKeyedData{TKey, TValue}"/> keyed data provider.
         /// </summary>
-        protected readonly IProvideKeyedData<string, YesNoLookupData> KeyedDataProvider;
+        protected readonly IProvideKeyedData<YesNoLookupData, string, string> KeyedDataProvider;
 
-        public SourceExampleToDestExampleDerivation(IProvideKeyedData<string, YesNoLookupData> keyedDataProvider)
+        public SourceExampleToDestExampleDerivation(IProvideKeyedData<YesNoLookupData, string, string> keyedDataProvider)
             => KeyedDataProvider = keyedDataProvider;
 
         /// <summary>
