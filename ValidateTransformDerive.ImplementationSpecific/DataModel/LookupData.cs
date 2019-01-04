@@ -5,7 +5,7 @@ namespace ValidateTransformDerive.ImplementationSpecific.DataModel
     /// <summary>
     /// A sample base for external data; 
     /// </summary>
-    public class LookupData : IProvideKey<string>, IProvideValue<string>
+    public class LookupData : KeyValueBase<string, string>
     {
         public int Key { get; set; }
 
@@ -15,12 +15,8 @@ namespace ValidateTransformDerive.ImplementationSpecific.DataModel
 
         public string Value { get; set; }
 
-        string IProvideKey<string>.Key => Name;
+        protected override string KeyInternal => Name;
 
-        public object GetKey()
-            => Key;
-
-        public object GetValue()
-            => Value;
+        protected override string ValueInternal => Value;
     }
 }

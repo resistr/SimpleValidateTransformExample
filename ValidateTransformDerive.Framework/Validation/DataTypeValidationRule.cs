@@ -39,16 +39,6 @@ namespace ValidateTransformDerive.Framework.Validation
             => ruleBuilder.Must(prop => ConvertToValidate(prop, typeof(short))).CreateMessageCode(nameof(IsShort));
 
         /// <summary>
-        /// Validates if the value is compatible with type <see cref="string"/>.
-        /// </summary>
-        /// <typeparam name="T">The source type of the item being validated.</typeparam>
-        /// <typeparam name="TProperty">The source type of the property being validated.</typeparam>
-        /// <param name="ruleBuilder">The rule builder to add the rule to.</param>
-        /// <returns><see cref="IRuleBuilderOptions{T, TProperty}"/> for the new rule.</returns>
-        public static IRuleBuilderOptions<T, TProperty> IsString<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder)
-            => ruleBuilder.Must(prop => ConvertToValidate(prop, typeof(string))).CreateMessageCode(nameof(IsString));
-
-        /// <summary>
         /// Validates if the value is compatible with type <see cref="uint"/>.
         /// </summary>
         /// <typeparam name="T">The source type of the item being validated.</typeparam>

@@ -16,9 +16,9 @@ namespace ValidateTransformDerive.ImplementationSpecific.Transform
         /// <summary>
         /// The DI provided <see cref="IProvideKeyedData{TKey, TValue}"/> keyed data provider.
         /// </summary>
-        protected readonly IProvideKeyedData<YesNoLookupData, string, string> KeyedDataProvider;
+        protected readonly IProvideKeyValueData<YesNoLookupData, string, string> KeyedDataProvider;
 
-        public SourceExampleToDestExampleDerivation(IProvideKeyedData<YesNoLookupData, string, string> keyedDataProvider)
+        public SourceExampleToDestExampleDerivation(IProvideKeyValueData<YesNoLookupData, string, string> keyedDataProvider)
             => KeyedDataProvider = keyedDataProvider;
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace ValidateTransformDerive.ImplementationSpecific.Transform
             dest.TestDeriveAddedValue = dest.TestInt16 + dest.TestInt32;
 
             // external data
-            dest.TestDeriveStringToBool = (await KeyedDataProvider.GetTypedReadOnlyDictionaryAsync())[source.TestString].Value;
+            dest.TestDeriveStringToBool = (await KeyedDataProvider.GetTypedReadOnlyDictionaryAsync())[source.TestString];
 
             // done
             return dest;

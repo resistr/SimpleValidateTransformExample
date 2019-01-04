@@ -21,7 +21,7 @@ namespace ValidateTransformDerive.Framework.DataProvider
         /// <typeparam name="TProvider">The provider of the data.</typeparam>
         /// <param name="services">The service collection to register the services to.</param>
         public static void AddCachedKeyedDataProvider<TKey, TValue, TData, TProvider, TTransform>(this IServiceCollection services)
-            where TData : IProvideKey<TKey>, IProvideValue<TValue>
+            where TData : IProvideKeyValue<TKey, TValue>
             where TProvider : class, IProvideData<TData>
             where TTransform : class, ITransform<TData, KeyValuePair<TKey, TData>>
         {
@@ -29,8 +29,8 @@ namespace ValidateTransformDerive.Framework.DataProvider
             services.AddScoped<IProvideData<TData>, TProvider>();
             services.AddTransformationService<TData, KeyValuePair<TKey, TData>, TTransform>();
             services.AddScoped<IProvideData<KeyValuePair<TKey, TData>>, GenericTransformDataProvider<TData, KeyValuePair<TKey, TData>>>();
-            services.AddScoped<IProvideKeyedData<TData>, GenericCachedKeyedDataProvider<TData, TKey, TValue>>();
-            services.AddScoped<IProvideKeyedData<TData, TKey, TValue>, GenericCachedKeyedDataProvider<TData, TKey, TValue>>();
+            services.AddScoped<IProvideKeyValueData<TData>, GenericCachedKeyedDataProvider<TData, TKey, TValue>>();
+            services.AddScoped<IProvideKeyValueData<TData, TKey, TValue>, GenericCachedKeyedDataProvider<TData, TKey, TValue>>();
 
             // Startup
             services.AddScoped<IHaveStartupActions, GenericCachedKeyedDataProvider<TData, TKey, TValue>>();

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidateTransformDerive.Imp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidateTransformDerive.TestWebApi472", "ValidateTransformDerive.TestWebApi472\ValidateTransformDerive.TestWebApi472.csproj", "{BAE16F93-981C-4F99-A994-A78BC6064AF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidateTransformDerive.Framework.Tests", "ValidateTransformDerive.Framework.Tests\ValidateTransformDerive.Framework.Tests.csproj", "{13A73B7A-A854-4FA8-A885-E72D37FFB824}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BAE16F93-981C-4F99-A994-A78BC6064AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAE16F93-981C-4F99-A994-A78BC6064AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAE16F93-981C-4F99-A994-A78BC6064AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13A73B7A-A854-4FA8-A885-E72D37FFB824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A73B7A-A854-4FA8-A885-E72D37FFB824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A73B7A-A854-4FA8-A885-E72D37FFB824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A73B7A-A854-4FA8-A885-E72D37FFB824}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

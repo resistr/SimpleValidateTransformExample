@@ -50,7 +50,7 @@ namespace ValidateTransformDerive.Framework.Validation
 
             RuleFor(source => source.TestSingle).Required().IsFloat();
 
-            RuleFor(source => source.TestString).Required().IsString();
+            RuleFor(source => source.TestString).Required();
 
             RuleFor(source => source.TestTimeSpan).Required().IsTimeSpan();
 

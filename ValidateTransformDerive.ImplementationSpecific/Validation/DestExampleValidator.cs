@@ -14,9 +14,9 @@ namespace ValidateTransformDerive.ImplementationSpecific.Validation
         /// <summary>
         /// The DI injected <see cref="IProvideKeyedData{YesNoLookupData}"/> to use for validation.
         /// </summary>
-        protected readonly IProvideKeyedData<YesNoLookupData, string, string> YesNoKeyedData;
+        protected readonly IProvideKeyValueData<YesNoLookupData, string, string> YesNoKeyedData;
 
-        public DestExampleValidator(IProvideKeyedData<YesNoLookupData, string, string> yesNoKeyedData)
+        public DestExampleValidator(IProvideKeyValueData<YesNoLookupData, string, string> yesNoKeyedData)
         {
             // let's save this for later in case something else is overriden that needs it. 
             YesNoKeyedData = yesNoKeyedData;

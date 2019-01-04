@@ -14,7 +14,7 @@ namespace ValidateTransformDerive.ImplementationSpecific.Validation
         /// <summary>
         /// The DI injected <see cref="IProvideKeyedData{YesNoLookupData}"/> to use for validation.
         /// </summary>
-        protected readonly IProvideKeyedData<YesNoLookupData, string, string> YesNoKeyedData;
+        protected readonly IProvideKeyValueData<YesNoLookupData, string, string> YesNoKeyedData;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SourceExampleValidator" /> class.
@@ -22,7 +22,7 @@ namespace ValidateTransformDerive.ImplementationSpecific.Validation
         /// <param name="yesNoKeyedDataValidationRule">
         /// The <see cref="IKeyedDataValidationRule{TKey, TValue}"/> for <see cref="YesNoLookupData"/>.
         /// </param>
-        public SourceExampleValidator(IProvideKeyedData<YesNoLookupData, string, string> yesNoKeyedData,
+        public SourceExampleValidator(IProvideKeyValueData<YesNoLookupData, string, string> yesNoKeyedData,
             IValidator<Address> addressValidator)
             : base(addressValidator)
         {

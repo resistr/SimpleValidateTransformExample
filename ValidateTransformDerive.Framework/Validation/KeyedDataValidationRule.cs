@@ -19,9 +19,9 @@ namespace ValidateTransformDerive.Framework.Validation
         /// <param name="keyedDataProvider">The data provider for the rule.</param>
         /// <returns><see cref="IRuleBuilderOptions{T, TProperty}"/> for the new rule.</returns>
         public static IRuleBuilderOptions<T, TProperty> ValidateKey<T, TProperty, TData, TKey, TValue>
-            (this IRuleBuilderOptions<T, TProperty> rule,
-            IProvideKeyedData<TData, TKey, TValue> keyedDataProvider)
-            where TData : IProvideKey<TKey>, IProvideValue<TValue>
+            (this IRuleBuilder<T, TProperty> rule,
+            IProvideKeyValueData<TData, TKey, TValue> keyedDataProvider)
+            where TData : IProvideKeyValue<TKey, TValue>
             where TProperty : TKey
             => rule.MustAsync(async (source, cancellationToken) =>
                 source == null ? false : (await keyedDataProvider.GetTypedReadOnlyDictionaryAsync()).ContainsKey(source))
@@ -37,12 +37,12 @@ namespace ValidateTransformDerive.Framework.Validation
         /// <param name="keyedDataProvider">The data provider for the rule.</param>
         /// <returns><see cref="IRuleBuilderOptions{T, TProperty}"/> for the new rule.</returns>
         public static IRuleBuilderOptions<T, TProperty> ValidateValue<T, TProperty, TData, TKey, TValue>
-            (this IRuleBuilderOptions<T, TProperty> ruleBuilder,
-            IProvideKeyedData<TData, TKey, TValue> keyedDataProvider)
-            where TData : IProvideKey<TKey>, IProvideValue<TValue>
+            (this IRuleBuilder<T, TProperty> ruleBuilder,
+            IProvideKeyValueData<TData, TKey, TValue> keyedDataProvider)
+            where TData : IProvideKeyValue<TKey, TValue>
             where TProperty : TValue
             => ruleBuilder.MustAsync(async (source, cancellationToken) =>
-                (await keyedDataProvider.GetTypedReadOnlyDictionaryAsync()).Values.Any(value => value.Value.Equals(source)))
+                (await keyedDataProvider.GetTypedReadOnlyDictionaryAsync()).Values.Any(value => value.Equals(source)))
             .CreateMessageCode($"{nameof(ValidateValue)}.{typeof(TData).Name}");
     }
 }
