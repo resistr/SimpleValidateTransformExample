@@ -7,7 +7,7 @@ using ValidateTransformDerive.Framework.Transformation;
 namespace ValidateTransformDerive.Framework.DataProvider
 {
     /// <summary>
-    /// A generic implementation of <see cref="IProvideData{TDest}"/> that uses <see cref="ITransform{TSource, TDest}"/>
+    /// A generic implementation of <see cref="IProvideData{TDest}"/> that uses <see cref="IDerive{TSource, TDest}"/>
     /// To provide transformed data.
     /// </summary>
     /// <typeparam name="TSource">The type of source data to transform.</typeparam>

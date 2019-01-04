@@ -107,10 +107,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncHelperTests.cs" />
+    <Compile Include="DefaultsTests.cs" />
+    <Compile Include="DependencyInjectionTests\HttpConfigurationExtensionsTests.cs" />
+    <Compile Include="DependencyInjectionTests\ServiceProviderScopedDependencyResolverTests.cs" />
+    <Compile Include="DependencyInjectionTests\ServiceProviderDependencyResolverTests.cs" />
+    <Compile Include="Derivation\ServiceCollectionExtensionsTests.cs" />
+    <Compile Include="Derivation\TestDerivor.cs" />
+    <Compile Include="Derivation\DerivationExceptionTests.cs" />
+    <Compile Include="Derivation\DerivationServiceTests.cs" />
+    <Compile Include="Derivation\DerivorBaseTests.cs" />
     <Compile Include="KeyValuePairExtensionsTests.cs" />
     <Compile Include="MockExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupActionExtensionsTests.cs" />
+    <Compile Include="Transformation\ServiceCollectionExtensionsTests.cs" />
+    <Compile Include="Transformation\TestTransformer.cs" />
+    <Compile Include="Transformation\TransformationExceptionTests.cs" />
+    <Compile Include="Transformation\TransformationServiceTests.cs" />
+    <Compile Include="Transformation\TransformerBaseTests.cs" />
     <Compile Include="Validation\AddressValidatorTests.cs" />
     <Compile Include="Validation\DataTypeValidationRuleTests.cs" />
     <Compile Include="Validation\KeyedDataValidationRuleTests.cs" />

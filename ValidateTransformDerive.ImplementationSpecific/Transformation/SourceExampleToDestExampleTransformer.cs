@@ -6,7 +6,7 @@ using ValidateTransformDerive.ImplementationSpecific.Dto;
 namespace ValidateTransformDerive.ImplementationSpecific.Transform
 {
     /// <summary>
-    /// Specific implementation of <see cref="ITransform{SourceExample, DestExample}"/>.
+    /// Specific implementation of <see cref="IDerive{SourceExample, DestExample}"/>.
     /// </summary>
     public class SourceExampleToDestExampleTransformer : TransformerBase<SourceExample, DestExample>
     {
