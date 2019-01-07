@@ -107,6 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncHelperTests.cs" />
+    <Compile Include="Caching\CachedTypeProviderTests.cs" />
+    <Compile Include="Caching\CachedTypeKeyTests.cs" />
+    <Compile Include="DataProvider\CachedDataProviderTests.cs" />
     <Compile Include="DefaultsTests.cs" />
     <Compile Include="DependencyInjectionTests\HttpConfigurationExtensionsTests.cs" />
     <Compile Include="DependencyInjectionTests\ServiceProviderScopedDependencyResolverTests.cs" />

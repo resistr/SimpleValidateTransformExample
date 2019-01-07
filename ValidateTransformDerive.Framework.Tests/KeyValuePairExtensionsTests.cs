@@ -11,7 +11,7 @@ namespace ValidateTransformDerive.Framework.Tests
     [TestClass]
     public class KeyValuePairExtensionsTests
     {
-        protected class TestData : IProvideKeyValue<string, string>
+        protected class TestData : IHaveKeyValue<string, string>
         {
             public string Key { get; set; }
 

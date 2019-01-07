@@ -1,4 +1,4 @@
-﻿using ValidateTransformDerive.Framework.DataProvider;
+﻿using ValidateTransformDerive.Framework;
 
 namespace ValidateTransformDerive.ImplementationSpecific.DataModel
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
-using ValidateTransformDerive.Framework.Transformation;
+using ValidateTransformDerive.Framework.Caching;
 
 namespace ValidateTransformDerive.Framework.DataProvider
 {
@@ -20,20 +20,19 @@ namespace ValidateTransformDerive.Framework.DataProvider
         /// </typeparam>
         /// <typeparam name="TProvider">The provider of the data.</typeparam>
         /// <param name="services">The service collection to register the services to.</param>
-        public static void AddCachedKeyedDataProvider<TKey, TValue, TData, TProvider, TTransform>(this IServiceCollection services)
-            where TData : IProvideKeyValue<TKey, TValue>
+        public static void AddCachedKeyedDataProvider<TKey, TValue, TData, TProvider>(this IServiceCollection services)
+            where TData : IHaveKeyValue<TKey, TValue>
             where TProvider : class, IProvideData<TData>
-            where TTransform : class, ITransform<TData, KeyValuePair<TKey, TData>>
         {
             // Data services
             services.AddScoped<IProvideData<TData>, TProvider>();
-            services.AddTransformationService<TData, KeyValuePair<TKey, TData>, TTransform>();
-            services.AddScoped<IProvideData<KeyValuePair<TKey, TData>>, GenericTransformDataProvider<TData, KeyValuePair<TKey, TData>>>();
-            services.AddScoped<IProvideKeyValueData<TData>, GenericCachedKeyedDataProvider<TData, TKey, TValue>>();
-            services.AddScoped<IProvideKeyValueData<TData, TKey, TValue>, GenericCachedKeyedDataProvider<TData, TKey, TValue>>();
+            services.AddCachedTypeProvider<IEnumerable<TData>>();
+            services.AddScoped<IProvideCachedData<TData>, CachedDataProvider<TData>>();
+            services.AddScoped<IProvideKeyValueData<TData>, CachedKeyValueDataProvider<TData, TKey, TValue>>();
+            services.AddScoped<IProvideKeyValueData<TData, TKey, TValue>, CachedKeyValueDataProvider<TData, TKey, TValue>>();
 
             // Startup
-            services.AddScoped<IHaveStartupActions, GenericCachedKeyedDataProvider<TData, TKey, TValue>>();
+            services.AddScoped<IHaveStartupActions, CachedDataProvider<TData>>();
         }
     }
 }

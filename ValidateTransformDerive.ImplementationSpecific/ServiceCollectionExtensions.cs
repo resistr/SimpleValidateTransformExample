@@ -6,7 +6,6 @@ using ValidateTransformDerive.Framework.Dto;
 using ValidateTransformDerive.Framework.Transformation;
 using ValidateTransformDerive.Framework.Validation;
 using ValidateTransformDerive.ImplementationSpecific.DataModel;
-using ValidateTransformDerive.ImplementationSpecific.DataModel.Transform;
 using ValidateTransformDerive.ImplementationSpecific.DataProvider;
 using ValidateTransformDerive.ImplementationSpecific.Dto;
 using ValidateTransformDerive.ImplementationSpecific.Transform;
@@ -27,8 +26,8 @@ namespace ValidateTransformDerive.ImplementationSpecific
         public static void AddClientSpecificTransformations(this IServiceCollection services)
         {
             // add any data providers
-            services.AddCachedKeyedDataProvider<string, string, YesNoLookupData, YesNoLookupDataProvider, YesNoLookupDataKeyValuePairTransform>();
-            services.AddCachedKeyedDataProvider<string, string, StateLookupData, StateLookupDataProvider, StateLookupDataKeyValuePairTransform>();
+            services.AddCachedKeyedDataProvider<string, string, YesNoLookupData, YesNoLookupDataProvider>();
+            services.AddCachedKeyedDataProvider<string, string, StateLookupData, StateLookupDataProvider>();
 
             // add validation.
             services.AddValidator<Address, AddressValidator>();

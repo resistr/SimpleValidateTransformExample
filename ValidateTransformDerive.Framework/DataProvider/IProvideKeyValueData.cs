@@ -8,7 +8,7 @@ namespace ValidateTransformDerive.Framework.DataProvider
     /// An interface describing the functionality of a keyed data provider.
     /// </summary>
     public interface IProvideKeyValueData<TData>
-        where TData : IProvideKeyValue
+        where TData : IHaveKeyValue
     {
         /// <summary>
         /// Gets the <see cref="IReadOnlyDictionary{object, object}"/> of the keyed data.
@@ -25,7 +25,7 @@ namespace ValidateTransformDerive.Framework.DataProvider
     /// <typeparam name="TKey">The key type.</typeparam>
     /// <typeparam name="TValue">The value type.</typeparam>
     public interface IProvideKeyValueData<TData, TKey, TValue> : IProvideKeyValueData<TData>
-        where TData : IProvideKeyValue<TKey, TValue>
+        where TData : IHaveKeyValue<TKey, TValue>
     {
         /// <summary>
         /// Gets the <see cref="IReadOnlyDictionary{TKey, TValue}"/> of the keyed data.

@@ -21,7 +21,7 @@ namespace ValidateTransformDerive.Framework.Validation
         public static IRuleBuilderOptions<T, TProperty> ValidateKey<T, TProperty, TData, TKey, TValue>
             (this IRuleBuilder<T, TProperty> rule,
             IProvideKeyValueData<TData, TKey, TValue> keyedDataProvider)
-            where TData : IProvideKeyValue<TKey, TValue>
+            where TData : IHaveKeyValue<TKey, TValue>
             where TProperty : TKey
             => rule.MustAsync(async (source, cancellationToken) =>
                 source == null ? false : (await keyedDataProvider.GetTypedReadOnlyDictionaryAsync()).ContainsKey(source))
@@ -39,7 +39,7 @@ namespace ValidateTransformDerive.Framework.Validation
         public static IRuleBuilderOptions<T, TProperty> ValidateValue<T, TProperty, TData, TKey, TValue>
             (this IRuleBuilder<T, TProperty> ruleBuilder,
             IProvideKeyValueData<TData, TKey, TValue> keyedDataProvider)
-            where TData : IProvideKeyValue<TKey, TValue>
+            where TData : IHaveKeyValue<TKey, TValue>
             where TProperty : TValue
             => ruleBuilder.MustAsync(async (source, cancellationToken) =>
                 (await keyedDataProvider.GetTypedReadOnlyDictionaryAsync()).Values.Any(value => value.Equals(source)))

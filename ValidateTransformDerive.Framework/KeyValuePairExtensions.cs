@@ -16,7 +16,7 @@ namespace ValidateTransformDerive.Framework
         /// <typeparam name="TValue">The value type.</typeparam>
         /// <param name="keyedValues">The collection of <see cref="KeyValuePair{TKey, TValue}"/> to convert.</param>
         /// <returns>The converted <see cref="IReadOnlyDictionary{object, object}"/>.</returns>
-        public static IReadOnlyDictionary<object, object> ToReadOnlyDictionary(this IEnumerable<IProvideKeyValue> keyedValues)
+        public static IReadOnlyDictionary<object, object> ToReadOnlyDictionary(this IEnumerable<IHaveKeyValue> keyedValues)
             => keyedValues.ToDictionary(k => k.GetKey(), v => v.GetValue());
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace ValidateTransformDerive.Framework
         /// <typeparam name="TValue">The value type.</typeparam>
         /// <param name="keyedValues">The collection of <see cref="KeyValuePair{TKey, TValue}"/> to convert.</param>
         /// <returns>The converted <see cref="IReadOnlyDictionary{TKey, TValue}"/>.</returns>
-        public static IReadOnlyDictionary<TKey, TValue> ToTypedReadOnlyDictionary<TKey, TValue>(this IEnumerable<IProvideKeyValue<TKey, TValue>> keyedValues)
+        public static IReadOnlyDictionary<TKey, TValue> ToTypedReadOnlyDictionary<TKey, TValue>(this IEnumerable<IHaveKeyValue<TKey, TValue>> keyedValues)
             => keyedValues.ToDictionary(k => k.Key, v => v.Value);
     }
 }

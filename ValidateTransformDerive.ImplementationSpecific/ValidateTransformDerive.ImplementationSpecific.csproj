@@ -62,8 +62,6 @@
   <ItemGroup>
     <Compile Include="DataModel\LookupData.cs" />
     <Compile Include="DataModel\StateLookupData.cs" />
-    <Compile Include="DataModel\Transform\StateLookupDataKeyValuePairTransform.cs" />
-    <Compile Include="DataModel\Transform\YesNoLookupDataKeyValuePairTransform.cs" />
     <Compile Include="DataModel\YesNoLookupData.cs" />
     <Compile Include="DataProvider\StateLookupDataProvider.cs" />
     <Compile Include="DataProvider\YesNoLookupDataProvider.cs" />
